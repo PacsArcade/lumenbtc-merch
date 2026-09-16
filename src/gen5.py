@@ -57,7 +57,7 @@ def render(name, w, h, body, sub, defs=""):
 # 1. the vintage man — cream card, the D01 line, our man
 b = f'<rect x="60" y="60" width="1680" height="2280" rx="40" fill="{CREAM}"/>'
 b += txt(900, 330, "YOU'RE NOT", 200, fill=NAVY) + txt(900, 540, "BUYING", 200, fill=NAVY) + txt(900, 750, "BITCOIN.", 200, fill=ORANGE_C)
-b += img(f"{SRC}/vintage-man.png", 250, 820, 1300, 1300)
+b += img(f"{SRC}/vintage-man-alpha.png", 250, 820, 1300, 1300)
 b += f'<rect x="60" y="2080" width="1680" height="260" fill="{NAVY}"/>'
 b += txt(900, 2260, "YOU'RE SELLING FIAT.", 150, fill=CREAM)
 render("vintage-man-selling-fiat-back", 1800, 2400, b, "back-tee")
@@ -87,6 +87,6 @@ render("thank-you-satoshi-window-back", 1800, 2400, b, "back-tee", DRIP + GRAIN)
 # 4. the ecosystem schematic — a white card with the line work (the 4× upscale), tee back
 b = f'<rect x="90" y="390" width="1620" height="1620" rx="30" fill="{WHITE}"/>'
 b += img(f"{SRC}/eco-x4.png", 120, 420, 1560, 1560)
-b += txt(900, 2160, "THE BITCOIN ECOSYSTEM", 96, fill=WHITE) + txt(900, 2260, "proof of work · full nodes · miners · the grid", 48, fill=ORANGE, font=PIX, weight=400)
+b += txt(900, 2160, "THE BITCOIN ECOSYSTEM", 96, fill=WHITE) + txt(900, 2260, "proof of work · nodes · miners · the grid", 34, fill=ORANGE, font=PIX, weight=400)
 render("bitcoin-ecosystem-card-back", 1800, 2400, b, "back-tee")
 print("done →", OUT)
