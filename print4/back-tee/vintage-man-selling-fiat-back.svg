@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1800" height="2400" viewBox="0 0 1800 2400"><defs></defs>
+<rect x="60" y="60" width="1680" height="2280" rx="40" fill="#ecdcb6"/><text x="900" y="330" font-family="Adwaita Sans" font-weight="900" font-size="200" fill="#1a2230" text-anchor="middle" >YOU'RE NOT</text>
+<text x="900" y="540" font-family="Adwaita Sans" font-weight="900" font-size="200" fill="#1a2230" text-anchor="middle" >BUYING</text>
+<text x="900" y="750" font-family="Adwaita Sans" font-weight="900" font-size="200" fill="#d9782c" text-anchor="middle" >BITCOIN.</text>
+<image xlink:href="/home/pac/dev/Reference/lustr/merch/pack-01/print4/src-forge/vintage-man.png" href="/home/pac/dev/Reference/lustr/merch/pack-01/print4/src-forge/vintage-man.png" x="250" y="820" width="1300" height="1300" preserveAspectRatio="xMidYMid slice" />
+<rect x="60" y="2080" width="1680" height="260" fill="#1a2230"/><text x="900" y="2260" font-family="Adwaita Sans" font-weight="900" font-size="150" fill="#ecdcb6" text-anchor="middle" >YOU'RE SELLING FIAT.</text>
+
+</svg>

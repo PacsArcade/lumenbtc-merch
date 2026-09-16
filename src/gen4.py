@@ -38,14 +38,15 @@ GRAIN = ('<filter id="grain" x="-5%" y="-5%" width="110%" height="110%">'
          '<feComposite in="SourceGraphic" in2="holes" operator="out"/></filter>')
 
 
-def care_b(cx, cy, size, fill=CREAM):
+def care_b(cx, cy, size, fill=CREAM, grain=True):
     """the traced ₿, centred at cx,cy, `size` = height in px, speckled like the print."""
     if not CARE_PATH:
         return txt(cx, cy + size * 0.36, "₿", size, fill=fill)
     # the trace lives in a 1200×1200 box; the glyph occupies roughly x 380–860, y 130–1070
     bw, bh, bx, by = 558.6, 747.6, 23.0, 321.2   # measured with inkscape --query
     k = size / bh
-    return (f'<g transform="translate({cx - (bx + bw/2)*k:.1f},{cy - (by + bh/2)*k:.1f}) scale({k:.5f})" filter="url(#grain)">'
+    flt = ' filter="url(#grain)"' if grain else ''
+    return (f'<g transform="translate({cx - (bx + bw/2)*k:.1f},{cy - (by + bh/2)*k:.1f}) scale({k:.5f})"{flt}>'
             f'<path d="{CARE_PATH}" fill="{fill}"/></g>\n')
 
 
@@ -56,21 +57,25 @@ def render(name, w, h, body, sub, defs=""):
     open(src, "w").write(svg(w, h, body, defs))
     r = subprocess.run(INK_CMD + [src, "--export-type=png", f"--export-filename={d}/{name}.png", "--export-dpi=96", "--export-background-opacity=0"], capture_output=True, text=True)
     print("ERR" if r.returncode else "ok", sub, name, f"{w}x{h}", r.stderr[-150:] if r.returncode else "")
-    subprocess.run(INK_CMD + [src, "--export-type=png", f"--export-filename={OUT}/preview/{name}.png", "--export-dpi=24", "--export-background=#1a1a1a", "--export-background-opacity=1"], capture_output=True, text=True)
+    subprocess.run(INK_CMD + [src, "--export-type=png", f"--export-filename={OUT}/preview/{name}.png", "--export-dpi=24", "--export-background-opacity=0"], capture_output=True, text=True)
 
 
-# ---------------------------------------------------------------- 1. the care ₿
-render("care-b-sticker", 1200, 1200, care_b(600, 600, 1000), "stickers", GRAIN)
-render("care-b-sticker-orange", 1200, 1200, care_b(600, 600, 1000, fill=ORANGE_C), "stickers", GRAIN)
-render("care-b-front-left-chest", 1800, 2400, care_b(1800 - 450, 400, 420), "front-tee", GRAIN)
-render("care-b-front-centre", 1800, 2400, care_b(900, 760, 1000), "front-tee", GRAIN)
+# ---------------------------------------------------------------- 1. the care ₿ — TIGHT, transparent (the Admiral: "crop around the b")
+TW, TH = 1850, 2400   # the glyph's own proportions (558.6 : 747.6) at 2400 px tall
+for nm, fill, grain in (("care-b-cream-grain", CREAM, True), ("care-b-cream-solid", CREAM, False),
+                        ("care-b-orange-grain", ORANGE_C, True), ("care-b-orange-solid", ORANGE_C, False)):
+    render(nm, TW, TH, care_b(TW / 2, TH / 2, TH * 0.96, fill=fill, grain=grain), "care-b", GRAIN)
+# the same four at sticker size (4 in die-cut, 1200 tall)
+for nm, fill, grain in (("care-b-sticker-cream-grain", CREAM, True), ("care-b-sticker-cream-solid", CREAM, False),
+                        ("care-b-sticker-orange-grain", ORANGE_C, True), ("care-b-sticker-orange-solid", ORANGE_C, False)):
+    render(nm, 925, 1200, care_b(925 / 2, 600, 1200 * 0.96, fill=fill, grain=grain), "stickers", GRAIN)
 # the poster back: navy block + orange block, the line, the ₿ — the reference's register, our type
 b = (f'<rect x="150" y="200" width="1500" height="900" fill="{NAVY}"/>'
      f'<rect x="150" y="1100" width="1500" height="1000" fill="{ORANGE_C}"/>')
 b += txt(900, 480, "BITCOIN", 300, fill=ORANGE_C)
 b += txt(900, 720, "DOESN'T FIGHT", 150, fill=CREAM) + txt(900, 900, "GOVERNMENTS.", 150, fill=CREAM)
-b += txt(330, 1400, "IT", 215, fill=NAVY, anchor="start") + txt(330, 1630, "IGNORES", 215, fill=NAVY, anchor="start") + txt(330, 1860, "THEM.", 215, fill=NAVY, anchor="start")
-b += care_b(1440, 1690, 400)
+b += txt(900, 1450, "IT IGNORES", 200, fill=NAVY) + txt(900, 1660, "THEM.", 200, fill=NAVY)
+b += care_b(900, 1930, 300)
 b += f'<rect x="150" y="200" width="1500" height="1900" fill="none" stroke="{CREAM}" stroke-width="10"/>'
 render("care-poster-back", 1800, 2400, b, "back-tee", GRAIN)
 
@@ -104,8 +109,8 @@ def pill(cx, cy, L, R, label_big, label_small, seed=624):
     out += f'<line x1="{cx}" y1="{y0}" x2="{cx}" y2="{y0+2*R}" stroke="#3a1f12" stroke-width="{R*0.05}"/>'
     out += txt(cx - L / 4, cy - R * 0.02, label_big, R * 0.62, fill=WHITE, weight=800)
     out += txt(cx - L / 4, cy + R * 0.5, label_small, R * 0.3, fill=WHITE, weight=600)
-    out += txt(cx + L / 4, cy - R * 0.02, "100M", R * 0.62, fill=WHITE, weight=800)
-    out += txt(cx + L / 4, cy + R * 0.5, "SATS", R * 0.36, fill=WHITE, weight=800)
+    out += txt(cx + L / 4, cy - R * 0.02, "sats", R * 0.62, fill=WHITE, weight=800)
+    out += txt(cx + L / 4, cy + R * 0.5, "100M SATS", R * 0.3, fill=WHITE, weight=600)
     return out
 
 
@@ -126,14 +131,14 @@ def bill(cx, cy, w, h):
 b = ""
 b += txt(450, 260, "HARD MONEY", 112, fill=ORANGE) + txt(1350, 260, "WEAK MONEY", 112, fill=RED)
 b += txt(900, 250, "vs", 80, fill=WHITE, weight=700)
-b += coin_half(470, 560, 190) + bill(1330, 560, 460, 260)
+b += care_b(470, 560, 330, fill=CREAM, grain=False) + bill(1330, 560, 460, 260)
 rows = [("21M CAP", "UNLIMITED PRINTING"), ("MATH-BASED", "POLICY-BASED"), ("OWNED BY YOU", "CONTROLLED"),
         ("DEFLATIONARY", "INFLATIONARY"), ("DECENTRALIZED", "CENTRALIZED"), ("FREEDOM MONEY", "DEBT MONEY")]
-y = 950
+y = 900
 for left, right in rows:
     b += f'<rect x="120" y="{y-95}" width="1560" height="170" rx="30" fill="#151515"/>'
     b += f'<line x1="900" y1="{y-80}" x2="900" y2="{y+60}" stroke="#333" stroke-width="6"/>'
-    b += txt(470, y + 22, left, 78, fill=GREEN) + txt(1330, y + 22, right, 78, fill=RED)
-    y += 215
-render("hard-vs-weak-back", 1800, 2400, b, "back-tee")
+    b += txt(470, y + 22, left, 68, fill=GREEN) + txt(1330, y + 22, right, 68, fill=RED)
+    y += 205
+render("hard-vs-weak-back", 1800, 2400, b, "back-tee", GRAIN)
 print("done →", OUT)
