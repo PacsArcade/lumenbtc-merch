@@ -78,7 +78,7 @@ ROCKET = [
     "....OOOOOO....",
     "...WWWWWWWW...",
     "...WWWWWWWW...",
-    "...WWWBBWWWW..",
+    "...WWWWWWWW...",
     "...WWBBBBWW...",
     "...WWBBBBWW...",
     "...WWWBBWWW...",
@@ -134,7 +134,7 @@ def umbrella(cx, cy, s):
     out = f'<path d="{d}" fill="{ORANGE}" stroke="{INK}" stroke-width="{s*0.02}"/>\n'
     out += f'<line x1="{cx}" y1="{top - rr*0.02}" x2="{cx}" y2="{top - rr*0.14}" stroke="{INK}" stroke-width="{s*0.03}" stroke-linecap="round"/>\n'
     out += f'<path d="M{cx},{top} V{cy + s*0.42} a{s*0.09},{s*0.09} 0 0,1 -{s*0.18},0" fill="none" stroke="{INK}" stroke-width="{s*0.035}" stroke-linecap="round"/>\n'
-    out += txt(cx, top - rr * 0.22, "₿", s * 0.42, fill=INK)
+    out += txt(cx, top - rr * 0.3, "₿", s * 0.34, fill=INK)
     return out
 
 
@@ -185,11 +185,7 @@ b += coin_flat(430, 420, 300)                      # the big one, 2 in
 b += coin_gold(1250, 420, 300, "A")                # the money one
 b += coin_inverse(300, 1000, 180)
 b += coin_ring(760, 1000, 180)
-b += pixels(1300, 1000, 22, [                      # pixel coin
-    "....OOOOOO....", "..OOOOOOOOOO..", ".OOOOOOOOOOOO.", "OOOOOOOOOOOOOO", "OOOOWWWWWOOOOO", "OOOWWOOOWWOOOO",
-    "OOOWWOOOWWOOOO", "OOOWWWWWWOOOOO", "OOOWWOOOWWOOOO", "OOOWWOOOWWOOOO", "OOOOWWWWWOOOOO", "OOOOOOOOOOOOOO",
-    ".OOOOOOOOOOOO.", "..OOOOOOOOOO..", "....OOOOOO....",
-], {"O": ORANGE, "W": INK})
+b += pixels(1300, 1000, 22, ['....OOOOOO....', '..OOOOOOOOOO..', '.OOOOOOOOOOOO.', 'OOOOOOOOOOOOOO', 'OOOOOOOOOOOOOO', 'OOOOOOOOOOOOOO', 'OOOOOOOOOOOOOO', 'OOOOOOOOOOOOOO', 'OOOOOOOOOOOOOO', 'OOOOOOOOOOOOOO', 'OOOOOOOOOOOOOO', 'OOOOOOOOOOOOOO', '.OOOOOOOOOOOO.', '..OOOOOOOOOO..', '....OOOOOO....'], {"O": ORANGE}) + txt(1300, 1070, "₿", 200, fill=INK, extra='transform="rotate(-12 1300 1000)"')
 b += rocket(330, 1650, 30)
 b += moon(880, 1600, 210)
 b += star(1160, 1400, 40) + star(1290, 1520, 26) + star(1220, 1720, 34, ORANGE) + star(1380, 1660, 22)
@@ -232,7 +228,7 @@ SINGLES = {
     "single-coin-gold": coin_gold(600, 600, 560, "S"),
     "single-rocket": rocket(600, 600, 52),
     "single-moon": moon(600, 600, 540),
-    "single-umbrella": umbrella(600, 600, 1100),
+    "single-umbrella": umbrella(600, 640, 760),
     "single-sats-pile": sats_pile(600, 600, 560),
     "single-clock": clock(600, 600, 1000),
 }

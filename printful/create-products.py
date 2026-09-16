@@ -130,7 +130,8 @@ def build_payload(plan, item):
 
 
 def main(argv):
-    plan = json.load(open(f"{HERE}/plan.json"))
+    plan_file = argv[argv.index("--plan") + 1] if "--plan" in argv else "plan.json"
+    plan = json.load(open(plan_file if os.path.isabs(plan_file) else f"{HERE}/{plan_file}"))
     only = argv[argv.index("--only") + 1].lower() if "--only" in argv else None
     store = argv[argv.index("--store") + 1] if "--store" in argv else DEFAULT_STORE
     env = load_env(store)

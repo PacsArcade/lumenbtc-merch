@@ -1,0 +1,22 @@
+{
+  "_about": "Sticker packs 02 (2026-09-15) → Printful. Sheets ride the Kiss-Cut Sticker Sheet (505, 5.83×8.27 in, one variant); singles ride Die-Cut matte vinyl (957, 4 in) and the gold coin also Holographic (673, 4 in). Prices null = PLACEHOLDER 2× cost until the Admiral's numbers. Files fetched from file_base_url (public GitHub raw). NOT created until the Admiral's review of set merch-stickers-02.",
+  "file_base_url": "https://raw.githubusercontent.com/PacsArcade/lumenbtc-merch/main",
+  "eco_catalog": {
+    "sheet":   {"product_id": 505, "name": "Kiss-cut sticker sheet 5.83×8.27 in", "sizes": ["5.83″×8.27″"], "placement": "default"},
+    "diecut":  {"product_id": 957, "name": "Die-cut sticker, matte vinyl 4 in", "sizes": ["4″×4″"], "placement": "default"},
+    "holo":    {"product_id": 673, "name": "Kiss-cut holographic sticker 4 in", "sizes": ["4″×4″"], "placement": "default"}
+  },
+  "products": [
+    {"kind": "sheet",  "title": "Coin Pack — sticker sheet",        "file": "print3/sheets/sheet-A-coins.png",     "retail_price": null},
+    {"kind": "sheet",  "title": "Sayings Pack — sticker sheet",     "file": "print3/sheets/sheet-B-sayings.png",   "retail_price": null},
+    {"kind": "sheet",  "title": "Rocket Pack — sticker sheet",      "file": "print3/sheets/sheet-C-rocket.png",    "retail_price": null},
+    {"kind": "diecut", "title": "₿ coin — die-cut sticker",          "file": "print3/singles/single-coin-flat.png", "retail_price": null},
+    {"kind": "diecut", "title": "₿ coin inverse — die-cut sticker",  "file": "print3/singles/single-coin-inverse.png", "retail_price": null},
+    {"kind": "holo",   "title": "₿ gold coin — holographic sticker", "file": "print3/singles/single-coin-gold.png", "retail_price": null},
+    {"kind": "diecut", "title": "Pixel rocket — die-cut sticker",    "file": "print3/singles/single-rocket.png",    "retail_price": null},
+    {"kind": "diecut", "title": "₿ moon — die-cut sticker",          "file": "print3/singles/single-moon.png",      "retail_price": null},
+    {"kind": "diecut", "title": "₿ umbrella — die-cut sticker",      "file": "print3/singles/single-umbrella.png",  "retail_price": null},
+    {"kind": "diecut", "title": "100M sats pile — die-cut sticker",  "file": "print3/singles/single-sats-pile.png", "retail_price": null},
+    {"kind": "diecut", "title": "Pixel clock — die-cut sticker",     "file": "print3/singles/single-clock.png",     "retail_price": null}
+  ]
+}
