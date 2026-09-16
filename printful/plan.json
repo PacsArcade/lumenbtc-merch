@@ -1,0 +1,39 @@
+{
+  "_about": "frens.earth merch pack-01 → Printful product plan (v2, 2026-09-15: bitcoin logo FRONT · the type on the BACK · brand on the SLEEVE — the Admiral's law). One entry = one sync product. Prices: null = PLACEHOLDER (2× Printful cost, rounded up) until the Admiral sets real numbers. Catalog ids/variants verified against api.printful.com (cached printful/catalog-*.json, print sizes printful/printfiles-818.json). Files are fetched by Printful from file_base_url (public GitHub raw).",
+  "file_base_url": "https://raw.githubusercontent.com/PacsArcade/lumenbtc-merch/main",
+  "eco_catalog": {
+    "tee":     {"product_id": 456, "name": "Stanley/Stella STTU169 Creator 2.0 — 100% organic cotton", "colors": ["Black"]},
+    "hoodie":  {"product_id": 479, "name": "Stanley/Stella STSU177 Cruiser 2.0 — organic/recycled eco hoodie", "colors": ["Black"]},
+    "cap":     {"product_id": 491, "name": "Econscious EC7000 — 100% organic cotton baseball cap", "colors": ["Black"], "embroidery": true, "placement": "embroidery_front_large", "thread_option": "thread_colors_front_large"},
+    "beanie":  {"product_id": 449, "name": "Atlantis NELSON — organic ribbed beanie", "colors": ["Black"], "embroidery": true, "placement": "default", "thread_option": "thread_colors"},
+    "tote":    {"product_id": 367, "name": "Econscious EC8000 — organic cotton eco tote", "colors": ["Black"], "placement": "default"},
+    "sticker": {"product_id": 358, "name": "Kiss-cut sticker (vinyl — Printful has no eco sticker; flagged)", "sizes": ["4″×4″"], "placement": "default"}
+  },
+  "tee_files":    {"front": "print2/front-tee/front-btc-left-chest.png", "sleeve_left": "print2/sleeve-tee/sleeve-frens-earth.png"},
+  "hoodie_files": {"front": "print2/front-hoodie/front-btc-hoodie.png", "sleeve_left": "print2/sleeve-hoodie/sleeve-frens-earth-hoodie.png"},
+  "products": [
+    {"kind": "tee", "title": "You're Selling Fiat — organic tee",          "back": "print2/back-tee/D01-selling-fiat-tee-back.png",           "retail_price": null},
+    {"kind": "tee", "title": "It Ignores Them — organic tee",              "back": "print2/back-tee/D02-ignores-them-tee-back.png",           "retail_price": null},
+    {"kind": "tee", "title": "Don't Trust. Verify. — organic tee",         "back": "print2/back-tee/D03-dont-trust-verify-tee-back.png",      "retail_price": null},
+    {"kind": "tee", "title": "100M Sats Pill — organic tee",               "back": "print2/back-tee/D04-100m-sats-pill-tee-back.png",         "retail_price": null},
+    {"kind": "tee", "title": "Tick Tock Next Block — organic tee",         "back": "print2/back-tee/D05-tick-tock-next-block-tee-back.png",   "retail_price": null},
+    {"kind": "tee", "title": "hodl (verb) — organic tee",                  "back": "print2/back-tee/D06-hodl-definition-tee-back.png",        "retail_price": null},
+    {"kind": "tee", "title": "Inflation Is Under Ctrl — organic tee",      "back": "print2/back-tee/D07-under-ctrl-tee-back.png",             "retail_price": null},
+    {"kind": "tee", "title": "Survival, Not Speculation — organic tee",    "back": "print2/back-tee/D08-survival-not-speculation-tee-back.png","retail_price": null},
+    {"kind": "tee", "title": "∞/21M — organic tee",                        "back": "print2/back-tee/D09-inf-over-21m-tee-back.png",           "retail_price": null},
+    {"kind": "tee", "title": "It's Not Yours — organic tee",               "back": "print2/back-tee/D10-not-yours-tee-back.png",              "retail_price": null},
+    {"kind": "tee", "title": "No Rulers — organic tee",                    "back": "print2/back-tee/D11-no-rulers-ring-tee-back.png",         "retail_price": null},
+    {"kind": "hoodie", "title": "You're Selling Fiat — eco hoodie",        "back": "print2/back-tee/D01-selling-fiat-tee-back.png",           "retail_price": null},
+    {"kind": "hoodie", "title": "Tick Tock Next Block — eco hoodie",       "back": "print2/back-tee/D05-tick-tock-next-block-tee-back.png",   "retail_price": null},
+    {"kind": "cap",    "title": "∞/21M — organic cap",                     "file": "print2/cap/cap-inf-over-21m.png",                         "retail_price": null},
+    {"kind": "beanie", "title": "∞/21M — organic beanie",                  "file": "print/D09-inf-over-21m-hat.png",                          "retail_price": null},
+    {"kind": "tote",   "title": "Tick Tock Next Block — eco tote",         "file": "print2/tote/tote-btc-tick-tock.png",                      "retail_price": null},
+    {"kind": "sticker", "title": "Don't Trust. Verify. — sticker",         "file": "print/D03-dont-trust-verify-sticker.png",                 "retail_price": null},
+    {"kind": "sticker", "title": "100M Sats Pill — sticker",               "file": "print/D04-100m-sats-pill-sticker.png",                    "retail_price": null},
+    {"kind": "sticker", "title": "Tick Tock Next Block — sticker",         "file": "print/D05-tick-tock-next-block-sticker.png",              "retail_price": null},
+    {"kind": "sticker", "title": "Under Ctrl keycap — sticker",            "file": "print/D07-under-ctrl-sticker.png",                        "retail_price": null},
+    {"kind": "sticker", "title": "∞/21M — sticker",                        "file": "print/D09-inf-over-21m-sticker.png",                      "retail_price": null},
+    {"kind": "sticker", "title": "Not Your Keys — sticker",                "file": "print/D10-not-your-keys-sticker.png",                     "retail_price": null},
+    {"kind": "sticker", "title": "No Rulers — sticker",                    "file": "print/D11-no-rulers-ring-sticker.png",                    "retail_price": null}
+  ]
+}

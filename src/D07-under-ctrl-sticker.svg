@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="1500" viewBox="0 0 1500 1500">
+<rect x="150.0" y="194.0" width="1200" height="1200" rx="144.0" fill="#ff4f00"/>
+<rect x="150.0" y="110.0" width="1200" height="1116.0" rx="144.0" fill="#ffffff"/>
+<rect x="258.0" y="206.0" width="983.9999999999999" height="888.0" rx="96.0" fill="none" stroke="#0b0b0b" stroke-width="14.4" opacity="0.25"/>
+<rect x="150.0" y="110.0" width="1200" height="1284.0" rx="144.0" fill="none" stroke="#0b0b0b" stroke-width="24.0"/>
+<text x="318.0" y="494.0" font-family="Adwaita Sans" font-weight="900" font-size="264.0" fill="#0b0b0b" text-anchor="start" letter-spacing="0" >Ctrl</text>
+<text x="774.0" y="1046.0" font-family="Adwaita Sans" font-weight="900" font-size="552.0" fill="#ff4f00" text-anchor="middle" letter-spacing="0" >$</text>
+
+</svg>

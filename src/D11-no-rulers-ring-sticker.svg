@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="1500" viewBox="0 0 1500 1500">
+<circle cx="750.0" cy="750.0" r="710.0" fill="#0b0b0b" stroke="#ff4f00" stroke-width="24"/>
+<circle cx="750.0" cy="750.0" r="360" fill="#0b0b0b"/>
+<text x="750.0" y="973.2" font-family="Adwaita Sans" font-weight="900" font-size="612.0" fill="#ff4f00" text-anchor="middle" letter-spacing="0" transform="rotate(-12 750 750)">₿</text>
+<circle cx="750.0" cy="750.0" r="460" fill="none" stroke="#ffffff" stroke-width="12"/>
+<defs><path id="ring" d="M210.0,750.0 a540,540 0 1,1 1080,0 a540,540 0 1,1 -1080,0"/></defs>
+<text font-family="Adwaita Sans" font-weight="900" font-size="78" fill="#ffffff"><textPath href="#ring" startOffset="0" textLength="3393" lengthAdjust="spacing">NO RULERS · 21 MILLION CAP · NO INFLATION · NO PERMISSION · </textPath></text>
+
+</svg>

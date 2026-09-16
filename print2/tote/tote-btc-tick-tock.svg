@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="1500" viewBox="0 0 1500 1500">
+<circle cx="750" cy="600" r="330" fill="#ff4f00"/>
+<text x="750" y="804.6" font-family="Adwaita Sans" font-weight="900" font-size="561.0" fill="#0b0b0b" text-anchor="middle" transform="rotate(-12 750 600)">₿</text>
+<text x="750" y="1120" font-family="Press Start 2P" font-weight="400" font-size="120" fill="#ffffff" text-anchor="middle" >TICK TOCK</text>
+<text x="750" y="1290" font-family="Press Start 2P" font-weight="400" font-size="120" fill="#ff4f00" text-anchor="middle" >NEXT BLOCK</text>
+
+</svg>

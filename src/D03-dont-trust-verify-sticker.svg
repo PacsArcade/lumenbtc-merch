@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="1500" viewBox="0 0 1500 1500">
+<rect x="40" y="40" width="1420" height="1420" rx="120" fill="#0b0b0b" stroke="#ff4f00" stroke-width="30"/>
+<text x="750.0" y="640" font-family="Adwaita Sans" font-weight="900" font-size="190" fill="#ffffff" text-anchor="middle" letter-spacing="0" >DON'T TRUST.</text>
+<text x="750.0" y="900" font-family="Adwaita Sans" font-weight="900" font-size="250" fill="#ff4f00" text-anchor="middle" letter-spacing="0" >VERIFY.</text>
+<circle cx="750.0" cy="1160" r="120" fill="#ff4f00"/>
+<text x="750.0" y="1234.4" font-family="Adwaita Sans" font-weight="900" font-size="204.0" fill="#0b0b0b" text-anchor="middle" letter-spacing="0" transform="rotate(-12 750 1160)">₿</text>
+
+</svg>

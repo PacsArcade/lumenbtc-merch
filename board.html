@@ -1,0 +1,159 @@
+<title>Lumen Merch Pack 01</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;900&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<style>
+  :root{
+    --ink:#121212; --panel:#1b1a19; --panel-2:#232120; --line:#2f2c29;
+    --text:#f3efe8; --muted:#a39c92; --accent:#ff4f00; --accent-ink:#1a0a03;
+    --ok:#5ef78a;
+  }
+  html,body{background:var(--ink);}
+  body{color:var(--text);font-family:"Archivo","Helvetica Neue",Arial,sans-serif;padding-inline:16px;padding-block:0 96px;max-width:1240px;margin:0 auto;}
+  a{color:var(--accent);}
+  header{display:grid;gap:14px;padding-block:28px 22px;border-bottom:1px solid var(--line);}
+  .eyebrow{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);}
+  h1{font-weight:900;font-size:clamp(30px,5vw,54px);line-height:1;margin:0;text-wrap:balance;letter-spacing:-.02em;}
+  h1 span{color:var(--accent);}
+  .lede{max-width:66ch;color:var(--muted);font-size:15px;line-height:1.5;margin:0;}
+  .laws{display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none;}
+  .laws li{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:12px;color:var(--text);background:var(--panel);border:1px solid var(--line);padding:6px 10px;border-radius:999px;}
+  .laws li b{color:var(--accent);font-weight:600;}
+  section{padding-block:26px 0;}
+  h2{font-size:13px;font-family:"IBM Plex Mono",ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0 0 14px;font-weight:600;}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px;}
+  .card{background:var(--panel);border:1px solid var(--line);display:grid;grid-template-rows:auto 1fr auto;overflow:hidden;position:relative;}
+  .card.on{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent);}
+  .art{background:#1a1a1a;display:grid;place-items:center;aspect-ratio:1/1;max-width:100%;overflow:hidden;}
+  .art img{width:100%;height:100%;object-fit:contain;display:block;}
+  .body{padding:14px 14px 10px;display:grid;gap:8px;align-content:start;}
+  .id{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11px;color:var(--accent);letter-spacing:.08em;}
+  .title{font-weight:900;font-size:19px;line-height:1.1;margin:0;letter-spacing:-.01em;}
+  .from{font-size:13px;color:var(--muted);line-height:1.45;margin:0;}
+  .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:2px;}
+  .chip{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11px;padding:3px 8px;border:1px solid var(--line);border-radius:4px;color:var(--text);background:var(--panel-2);}
+  .chip.eco{border-color:#2f5a3c;color:var(--ok);}
+  .spec{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11px;color:var(--muted);}
+  label.pick{display:flex;align-items:center;gap:10px;padding:12px 14px;border-top:1px solid var(--line);cursor:pointer;font-size:14px;font-weight:700;user-select:none;}
+  label.pick input{width:18px;height:18px;accent-color:var(--accent);}
+  label.pick:focus-within{outline:2px solid var(--accent);outline-offset:-2px;}
+  .bar{position:fixed;left:0;right:0;bottom:0;background:rgba(18,18,18,.94);backdrop-filter:blur(8px);border-top:1px solid var(--line);padding:12px 16px;padding-bottom:calc(12px + env(safe-area-inset-bottom,0px));display:flex;gap:12px;align-items:center;flex-wrap:wrap;}
+  .bar .count{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:13px;color:var(--muted);}
+  .bar .count b{color:var(--text);}
+  .bar code{flex:1 1 320px;font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:12px;color:var(--text);background:var(--panel);border:1px solid var(--line);padding:8px 10px;border-radius:4px;white-space:nowrap;overflow-x:auto;min-width:0;}
+  .bar button{font:inherit;font-weight:700;background:var(--accent);color:var(--accent-ink);border:0;padding:10px 16px;border-radius:4px;cursor:pointer;}
+  .bar button:focus-visible{outline:2px solid var(--text);outline-offset:2px;}
+  table{border-collapse:collapse;width:100%;font-size:14px;}
+  .tablewrap{overflow-x:auto;}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top;}
+  th{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600;}
+  td.num{font-family:"IBM Plex Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums;white-space:nowrap;}
+  .note{background:var(--panel);border-left:3px solid var(--accent);padding:12px 14px;font-size:14px;line-height:1.5;color:var(--text);max-width:72ch;}
+  .note p{margin:0 0 6px;}
+  .note p:last-child{margin:0;}
+  @media (prefers-reduced-motion:no-preference){.card{transition:border-color .15s,box-shadow .15s;}}
+</style>
+
+<header>
+  <div class="eyebrow">lumen.btc · merch pack 01 · pick board</div>
+  <h1>Twelve original bitcoin jokes, <span>print-ready.</span></h1>
+  <p class="lede">The meme folder gave us the punchlines; none of those files could go to print (borrowed characters, other people's watermarks, 1200 px). Every piece below is our own type and vector at 300 DPI in Lumen's 624 nm orange. Tick the ones that ship, copy the pick line at the bottom, and I create them in Printful on the organic catalog.</p>
+  <ul class="laws">
+    <li><b>colour</b> #ff4f00 · white · ink</li>
+    <li><b>garments</b> black organic cotton</li>
+    <li><b>tee/hoodie/tote</b> 3600×4800 px</li>
+    <li><b>sticker</b> 1500×1500 px, kiss-cut 4″</li>
+    <li><b>cap/beanie</b> 1350×675 px, 2-thread flat</li>
+    <li><b>IP</b> nothing borrowed</li>
+  </ul>
+</header>
+
+<section>
+  <h2>Designs</h2>
+  <div class="grid" id="grid"></div>
+</section>
+
+<section>
+  <h2>Eco catalog these land on (Printful ids verified 2026-09-15)</h2>
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th>Blank</th><th>Why</th><th>Printful id</th><th>Base cost</th></tr></thead>
+    <tbody>
+      <tr><td>Stanley/Stella Creator 2.0 tee</td><td>100% organic ring-spun cotton, 15 colours, 5XL</td><td class="num">456</td><td class="num">$14.25</td></tr>
+      <tr><td>Stanley/Stella Cruiser 2.0 hoodie</td><td>organic cotton + recycled poly, eco line</td><td class="num">479</td><td class="num">$33.25</td></tr>
+      <tr><td>Econscious organic baseball cap</td><td>100% organic cotton, flat embroidery</td><td class="num">491</td><td class="num">$16.92</td></tr>
+      <tr><td>Atlantis organic ribbed beanie</td><td>organic cotton, flat embroidery</td><td class="num">449</td><td class="num">$17.94</td></tr>
+      <tr><td>Econscious organic tote</td><td>organic cotton, front print</td><td class="num">367</td><td class="num">$15.87</td></tr>
+      <tr><td>Kiss-cut sticker 4″×4″</td><td>vinyl — Printful has no eco sticker stock; flagged</td><td class="num">358 / 10164</td><td class="num">$2.54</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<section>
+  <h2>Before anything sells</h2>
+  <div class="note">
+    <p><b>Prices are yours.</b> The plan file carries no retail numbers. Until you set them the script marks every product with a placeholder at twice Printful's cost, so nothing invented reaches a storefront.</p>
+    <p><b>Stickers print on white vinyl.</b> Every sticker here carries its own dark or orange field so white type survives; anything transparent would have printed white-on-white.</p>
+    <p><b>Embroidery is two threads.</b> The ∞/21M cap and beanie use Printful's 1801 White and 1987 Orange; the file already uses the thread hex so digitising maps 1:1.</p>
+  </div>
+</section>
+
+<div class="bar" role="region" aria-label="your picks">
+  <span class="count"><b id="n">0</b> picked</span>
+  <code id="line">nothing picked yet</code>
+  <button id="copy" type="button">Copy pick line</button>
+</div>
+
+<script>
+  const items = [
+    {id:"D01", name:"You're Selling Fiat", from:"the 'not buying bitcoin, selling fiat' toast", files:["D01-selling-fiat-tee"], products:["tee","hoodie"], spec:"3600×4800 front"},
+    {id:"D02", name:"It Ignores Them", from:"the 'doesn't fight governments' poster", files:["D02-ignores-them-tee"], products:["tee"], spec:"3600×4800 front"},
+    {id:"D03", name:"Don't Trust. Verify.", from:"the Kill Dollar Bill tagline, kept, the movie dropped", files:["D03-dont-trust-verify-tee","D03-dont-trust-verify-sticker"], products:["tee","sticker"], spec:"tee + 1500² sticker"},
+    {id:"D04", name:"100M Sats Pill", from:"the sats capsule + Tic Tac orange pills", files:["D04-100m-sats-pill-tee","D04-100m-sats-pill-sticker"], products:["tee","sticker"], spec:"tee + capsule-shaped sticker"},
+    {id:"D05", name:"Tick Tock Next Block", from:"house lore, pixel face (arcade tie)", files:["D05-tick-tock-next-block-tee","D05-tick-tock-next-block-sticker"], products:["tee","tote","sticker"], spec:"tee + tote + 1500² sticker"},
+    {id:"D06", name:"hodl (verb)", from:"the dictionary-page meme, rewritten", files:["D06-hodl-definition-tee"], products:["tee"], spec:"3600×4800 front"},
+    {id:"D07", name:"Inflation Is Under Ctrl", from:"the dollar-under-the-Ctrl-key photo, redrawn as vector", files:["D07-under-ctrl-tee","D07-under-ctrl-sticker"], products:["tee","sticker"], spec:"tee + keycap-shaped sticker"},
+    {id:"D08", name:"Survival, Not Speculation", from:"the three-shield infographic", files:["D08-survival-not-speculation-tee"], products:["tee (front or back)"], spec:"3600×4800"},
+    {id:"D09", name:"∞ / 21M", from:"Lumen's own fraction mark (∞ over a bar over 21M, never ÷)", files:["D09-inf-over-21m-hat","D09-inf-over-21m-sticker","D09-inf-over-21m-tee"], products:["cap","beanie","sticker","tee"], spec:"1350×675 embroidery + sticker + tee"},
+    {id:"D10", name:"It's Not Yours", from:"the four-panel 'my money's in the bank' comic, panel one", files:["D10-not-yours-tee","D10-not-your-keys-sticker"], products:["tee","sticker"], spec:"tee + orange-field sticker"},
+    {id:"D11", name:"No Rulers Ring", from:"the empires collage's last line, as a seal", files:["D11-no-rulers-ring-tee","D11-no-rulers-ring-sticker"], products:["tee","sticker"], spec:"tee + round sticker"},
+  ];
+  const eco = {tee:"organic tee", hoodie:"eco hoodie", cap:"organic cap", beanie:"organic beanie", tote:"organic tote", sticker:"sticker (vinyl)", "tee (front or back)":"organic tee"};
+  const grid = document.getElementById("grid");
+  let picks = {};
+  try { picks = JSON.parse(localStorage.getItem("lumen-pack01-picks") || "{}"); } catch (e) { picks = {}; }
+
+  for (const it of items) {
+    for (const f of it.files) {
+      const kind = f.endsWith("-sticker") ? "sticker" : f.endsWith("-hat") ? "cap / beanie" : "tee";
+      const card = document.createElement("article");
+      card.className = "card" + (picks[f] ? " on" : "");
+      card.innerHTML = `
+        <div class="art"><img src="preview/${f}.png" alt="${it.name} — ${kind} preview" loading="lazy"></div>
+        <div class="body">
+          <div class="id">${it.id} · ${kind}</div>
+          <h3 class="title">${it.name}</h3>
+          <p class="from">from ${it.from}</p>
+          <div class="chips">${(kind === "tee" ? it.products.filter(p => p !== "sticker" && p !== "cap" && p !== "beanie") : kind === "sticker" ? ["sticker"] : ["cap","beanie"]).map(p => `<span class="chip eco">${eco[p] || p}</span>`).join("")}</div>
+          <div class="spec">${f}.png</div>
+        </div>
+        <label class="pick"><input type="checkbox" id="pick-${f}" ${picks[f] ? "checked" : ""}> ship it</label>`;
+      card.querySelector("input").addEventListener("change", e => {
+        picks[f] = e.target.checked; if (!e.target.checked) delete picks[f];
+        card.classList.toggle("on", e.target.checked);
+        try { localStorage.setItem("lumen-pack01-picks", JSON.stringify(picks)); } catch (err) {}
+        render();
+      });
+      grid.appendChild(card);
+    }
+  }
+  const n = document.getElementById("n"), line = document.getElementById("line");
+  function render() {
+    const keys = Object.keys(picks);
+    n.textContent = keys.length;
+    line.textContent = keys.length ? "ship: " + keys.join(", ") : "nothing picked yet";
+  }
+  render();
+  document.getElementById("copy").addEventListener("click", async () => {
+    try { await navigator.clipboard.writeText(line.textContent); document.getElementById("copy").textContent = "Copied"; setTimeout(() => document.getElementById("copy").textContent = "Copy pick line", 1400); } catch (e) {}
+  });
+</script>

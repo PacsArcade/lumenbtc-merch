@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="1500" viewBox="0 0 1500 1500">
+<rect x="40" y="40" width="1420" height="1420" rx="80" fill="#ff4f00"/>
+<text x="750.0" y="560" font-family="Adwaita Sans" font-weight="900" font-size="210" fill="#0b0b0b" text-anchor="middle" letter-spacing="0" >NOT YOUR</text>
+<text x="750.0" y="800" font-family="Adwaita Sans" font-weight="900" font-size="210" fill="#0b0b0b" text-anchor="middle" letter-spacing="0" >KEYS,</text>
+<text x="750.0" y="1060" font-family="Adwaita Sans" font-weight="900" font-size="150" fill="#ffffff" text-anchor="middle" letter-spacing="0" >NOT YOUR COINS.</text>
+<circle cx="750.0" cy="1270" r="110" fill="#0b0b0b"/>
+<text x="750.0" y="1338.2" font-family="Adwaita Sans" font-weight="900" font-size="187.0" fill="#ff4f00" text-anchor="middle" letter-spacing="0" transform="rotate(-12 750 1270)">₿</text>
+
+</svg>

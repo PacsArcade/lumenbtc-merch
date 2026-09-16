@@ -1,0 +1,173 @@
+[
+  {
+    "name": "D01-selling-fiat-tee",
+    "w": 3600,
+    "h": 4800,
+    "note": "tee/hoodie front, dark garment",
+    "svg": "src/D01-selling-fiat-tee.svg",
+    "print": "print/D01-selling-fiat-tee.png",
+    "preview": "preview/D01-selling-fiat-tee.png"
+  },
+  {
+    "name": "D02-ignores-them-tee",
+    "w": 3600,
+    "h": 4800,
+    "note": "tee front, dark garment",
+    "svg": "src/D02-ignores-them-tee.svg",
+    "print": "print/D02-ignores-them-tee.png",
+    "preview": "preview/D02-ignores-them-tee.png"
+  },
+  {
+    "name": "D03-dont-trust-verify-tee",
+    "w": 3600,
+    "h": 4800,
+    "note": "tee front, dark garment",
+    "svg": "src/D03-dont-trust-verify-tee.svg",
+    "print": "print/D03-dont-trust-verify-tee.png",
+    "preview": "preview/D03-dont-trust-verify-tee.png"
+  },
+  {
+    "name": "D03-dont-trust-verify-sticker",
+    "w": 1500,
+    "h": 1500,
+    "note": "kiss-cut sticker 5x5 (order at 4x4)",
+    "svg": "src/D03-dont-trust-verify-sticker.svg",
+    "print": "print/D03-dont-trust-verify-sticker.png",
+    "preview": "preview/D03-dont-trust-verify-sticker.png"
+  },
+  {
+    "name": "D04-100m-sats-pill-tee",
+    "w": 3600,
+    "h": 4800,
+    "note": "tee front, dark garment",
+    "svg": "src/D04-100m-sats-pill-tee.svg",
+    "print": "print/D04-100m-sats-pill-tee.png",
+    "preview": "preview/D04-100m-sats-pill-tee.png"
+  },
+  {
+    "name": "D04-100m-sats-pill-sticker",
+    "w": 1500,
+    "h": 1500,
+    "note": "kiss-cut sticker, capsule shape",
+    "svg": "src/D04-100m-sats-pill-sticker.svg",
+    "print": "print/D04-100m-sats-pill-sticker.png",
+    "preview": "preview/D04-100m-sats-pill-sticker.png"
+  },
+  {
+    "name": "D05-tick-tock-next-block-tee",
+    "w": 3600,
+    "h": 4800,
+    "note": "tee front, dark garment; pixel face = house arcade tie",
+    "svg": "src/D05-tick-tock-next-block-tee.svg",
+    "print": "print/D05-tick-tock-next-block-tee.png",
+    "preview": "preview/D05-tick-tock-next-block-tee.png"
+  },
+  {
+    "name": "D05-tick-tock-next-block-sticker",
+    "w": 1500,
+    "h": 1500,
+    "note": "kiss-cut sticker, square",
+    "svg": "src/D05-tick-tock-next-block-sticker.svg",
+    "print": "print/D05-tick-tock-next-block-sticker.png",
+    "preview": "preview/D05-tick-tock-next-block-sticker.png"
+  },
+  {
+    "name": "D06-hodl-definition-tee",
+    "w": 3600,
+    "h": 4800,
+    "note": "tee front, dark garment (dictionary entry)",
+    "svg": "src/D06-hodl-definition-tee.svg",
+    "print": "print/D06-hodl-definition-tee.png",
+    "preview": "preview/D06-hodl-definition-tee.png"
+  },
+  {
+    "name": "D07-under-ctrl-tee",
+    "w": 3600,
+    "h": 4800,
+    "note": "tee front, dark garment (keycap joke)",
+    "svg": "src/D07-under-ctrl-tee.svg",
+    "print": "print/D07-under-ctrl-tee.png",
+    "preview": "preview/D07-under-ctrl-tee.png"
+  },
+  {
+    "name": "D07-under-ctrl-sticker",
+    "w": 1500,
+    "h": 1500,
+    "note": "kiss-cut sticker, keycap shape",
+    "svg": "src/D07-under-ctrl-sticker.svg",
+    "print": "print/D07-under-ctrl-sticker.png",
+    "preview": "preview/D07-under-ctrl-sticker.png"
+  },
+  {
+    "name": "D08-survival-not-speculation-tee",
+    "w": 3600,
+    "h": 4800,
+    "note": "tee front or back print, dark garment",
+    "svg": "src/D08-survival-not-speculation-tee.svg",
+    "print": "print/D08-survival-not-speculation-tee.png",
+    "preview": "preview/D08-survival-not-speculation-tee.png"
+  },
+  {
+    "name": "D09-inf-over-21m-hat",
+    "w": 760,
+    "h": 700,
+    "note": "cap/beanie embroidery front \u2014 3 thread colours max (white, 624 orange)",
+    "svg": "src/D09-inf-over-21m-hat.svg",
+    "print": "print/D09-inf-over-21m-hat.png",
+    "preview": "preview/D09-inf-over-21m-hat.png"
+  },
+  {
+    "name": "D09-inf-over-21m-sticker",
+    "w": 1500,
+    "h": 1500,
+    "note": "kiss-cut sticker, round",
+    "svg": "src/D09-inf-over-21m-sticker.svg",
+    "print": "print/D09-inf-over-21m-sticker.png",
+    "preview": "preview/D09-inf-over-21m-sticker.png"
+  },
+  {
+    "name": "D09-inf-over-21m-tee",
+    "w": 3600,
+    "h": 4800,
+    "note": "tee front (also works small, left chest)",
+    "svg": "src/D09-inf-over-21m-tee.svg",
+    "print": "print/D09-inf-over-21m-tee.png",
+    "preview": "preview/D09-inf-over-21m-tee.png"
+  },
+  {
+    "name": "D10-not-yours-tee",
+    "w": 3600,
+    "h": 4800,
+    "note": "tee front, dark garment",
+    "svg": "src/D10-not-yours-tee.svg",
+    "print": "print/D10-not-yours-tee.png",
+    "preview": "preview/D10-not-yours-tee.png"
+  },
+  {
+    "name": "D10-not-your-keys-sticker",
+    "w": 1500,
+    "h": 1500,
+    "note": "kiss-cut sticker, orange field",
+    "svg": "src/D10-not-your-keys-sticker.svg",
+    "print": "print/D10-not-your-keys-sticker.png",
+    "preview": "preview/D10-not-your-keys-sticker.png"
+  },
+  {
+    "name": "D11-no-rulers-ring-tee",
+    "w": 3600,
+    "h": 4800,
+    "note": "tee front, dark garment",
+    "svg": "src/D11-no-rulers-ring-tee.svg",
+    "print": "print/D11-no-rulers-ring-tee.png",
+    "preview": "preview/D11-no-rulers-ring-tee.png"
+  },
+  {
+    "name": "D11-no-rulers-ring-sticker",
+    "w": 1500,
+    "h": 1500,
+    "note": "kiss-cut sticker, round, dark field",
+    "svg": "src/D11-no-rulers-ring-sticker.svg",
+    "print": "print/D11-no-rulers-ring-sticker.png",
+    "preview": "preview/D11-no-rulers-ring-sticker.png"
+  }
+]
