@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1800" height="2400" viewBox="0 0 1800 2400"><defs></defs>
-<rect x="90" y="390" width="1620" height="1620" rx="30" fill="#ffffff"/><image xlink:href="/home/pac/dev/Reference/lustr/merch/pack-01/print4/src-forge/eco-x4.png" href="/home/pac/dev/Reference/lustr/merch/pack-01/print4/src-forge/eco-x4.png" x="120" y="420" width="1560" height="1560" preserveAspectRatio="xMidYMid slice" />
-<text x="900" y="2160" font-family="Adwaita Sans" font-weight="900" font-size="96" fill="#ffffff" text-anchor="middle" >THE BITCOIN ECOSYSTEM</text>
-<text x="900" y="2260" font-family="Press Start 2P" font-weight="400" font-size="34" fill="#ff4f00" text-anchor="middle" >proof of work · nodes · miners · the grid</text>
+<text x="900" y="300" font-family="Adwaita Sans" font-weight="900" font-size="96" fill="#ffffff" text-anchor="middle" >THE BITCOIN ECOSYSTEM</text>
+<text x="900" y="400" font-family="Press Start 2P" font-weight="400" font-size="34" fill="#ff4f00" text-anchor="middle" >proof of work · nodes · miners · the grid</text>
+<rect x="90" y="520" width="1620" height="1620" rx="30" fill="#ffffff"/><image xlink:href="/home/pac/dev/Reference/lustr/merch/pack-01/print4/src-forge/eco-x4.png" href="/home/pac/dev/Reference/lustr/merch/pack-01/print4/src-forge/eco-x4.png" x="120" y="550" width="1560" height="1560" preserveAspectRatio="xMidYMid slice" />
 
 </svg>

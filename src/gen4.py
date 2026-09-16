@@ -72,10 +72,10 @@ for nm, fill, grain in (("care-b-sticker-cream-grain", CREAM, True), ("care-b-st
 # the poster back: navy block + orange block, the line, the ₿ — the reference's register, our type
 b = (f'<rect x="150" y="200" width="1500" height="900" fill="{NAVY}"/>'
      f'<rect x="150" y="1100" width="1500" height="1000" fill="{ORANGE_C}"/>')
-b += txt(900, 480, "BITCOIN", 300, fill=ORANGE_C)
-b += txt(900, 720, "DOESN'T FIGHT", 150, fill=CREAM) + txt(900, 900, "GOVERNMENTS.", 150, fill=CREAM)
-b += txt(900, 1450, "IT IGNORES", 200, fill=NAVY) + txt(900, 1660, "THEM.", 200, fill=NAVY)
-b += care_b(900, 1930, 300)
+b += txt(900, 560, "BITCOIN", 280, fill=ORANGE_C)
+b += txt(900, 780, "DOESN'T FIGHT", 140, fill=CREAM) + txt(900, 950, "GOVERNMENTS.", 140, fill=CREAM)
+b += txt(900, 1400, "IT IGNORES", 190, fill=NAVY) + txt(900, 1600, "THEM.", 190, fill=NAVY)
+b += care_b(900, 1860, 260)
 b += f'<rect x="150" y="200" width="1500" height="1900" fill="none" stroke="{CREAM}" stroke-width="10"/>'
 render("care-poster-back", 1800, 2400, b, "back-tee", GRAIN)
 
@@ -138,7 +138,7 @@ y = 900
 for left, right in rows:
     b += f'<rect x="120" y="{y-95}" width="1560" height="170" rx="30" fill="#151515"/>'
     b += f'<line x1="900" y1="{y-80}" x2="900" y2="{y+60}" stroke="#333" stroke-width="6"/>'
-    b += txt(470, y + 22, left, 68, fill=GREEN) + txt(1330, y + 22, right, 68, fill=RED)
+    b += txt(470, y + 22, left, 66, fill=GREEN) + txt(1300, y + 22, right, 60, fill=RED)
     y += 205
 render("hard-vs-weak-back", 1800, 2400, b, "back-tee", GRAIN)
 print("done →", OUT)

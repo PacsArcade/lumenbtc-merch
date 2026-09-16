@@ -61,14 +61,18 @@ b += img(f"{SRC}/vintage-man-alpha.png", 250, 820, 1300, 1300)
 b += f'<rect x="60" y="2080" width="1680" height="260" fill="{NAVY}"/>'
 b += txt(900, 2260, "YOU'RE SELLING FIAT.", 150, fill=CREAM)
 render("vintage-man-selling-fiat-back", 1800, 2400, b, "back-tee")
+if os.path.exists(f"{SRC}/joint-man-alpha.png"):
+    b = b.replace("vintage-man-alpha.png", "joint-man-alpha.png")
+    render("joint-man-selling-fiat-back", 1800, 2400, b, "back-tee")
 
 # 2. the monster poster — painting on top, our title block over the bottom
 b = f'<clipPath id="pc"><rect x="60" y="60" width="1680" height="2280"/></clipPath><g clip-path="url(#pc)">'
-b += img(f"{SRC}/poster.png", 60, 60, 1680, 1680 * 1536 / 1024, 'preserveAspectRatio="xMinYMin slice"')
+b += img(f"{SRC}/poster.png", 60, 420, 1680, 1680 * 1536 / 1024, 'preserveAspectRatio="xMinYMin slice"')
 b += '</g>'
+b += f'<rect x="60" y="60" width="1680" height="360" fill="{INK}"/>'
 b += f'<rect x="60" y="1720" width="1680" height="620" fill="{INK}"/>'
-b += txt(900, 210, "UNSTOPPABLE... UNCENSORABLE!", 88, fill=RED, weight=900)
-b += txt(900, 300, "21 MILLION, AND NOT ONE MORE.", 62, fill=WHITE, weight=800)
+b += txt(900, 180, "UNSTOPPABLE!", 96, fill=RED, weight=900) + txt(900, 290, "UNCENSORABLE!", 96, fill=RED, weight=900)
+b += txt(900, 380, "21 MILLION, AND NOT ONE MORE.", 56, fill=WHITE, weight=800)
 b += txt(900, 1960, "BITCOIN", 300, fill=RED, extra='filter="url(#drip)"')
 b += txt(900, 2130, "in COLOR", 120, fill=WHITE, weight=800)
 b += txt(900, 2270, "THE MONEY BANKERS CAN'T PRINT AND POLITICIANS CAN'T STOP", 46, fill="#bdbdbd", weight=700)
@@ -85,8 +89,8 @@ b += txt(900, 2170, "SATOSHI", 300, fill=CREAM, extra='filter="url(#drip)"')
 render("thank-you-satoshi-window-back", 1800, 2400, b, "back-tee", DRIP + GRAIN)
 
 # 4. the ecosystem schematic — a white card with the line work (the 4× upscale), tee back
-b = f'<rect x="90" y="390" width="1620" height="1620" rx="30" fill="{WHITE}"/>'
-b += img(f"{SRC}/eco-x4.png", 120, 420, 1560, 1560)
-b += txt(900, 2160, "THE BITCOIN ECOSYSTEM", 96, fill=WHITE) + txt(900, 2260, "proof of work · nodes · miners · the grid", 34, fill=ORANGE, font=PIX, weight=400)
+b = txt(900, 300, "THE BITCOIN ECOSYSTEM", 96, fill=WHITE) + txt(900, 400, "proof of work · nodes · miners · the grid", 34, fill=ORANGE, font=PIX, weight=400)
+b += f'<rect x="90" y="520" width="1620" height="1620" rx="30" fill="{WHITE}"/>'
+b += img(f"{SRC}/eco-x4.png", 120, 550, 1560, 1560)
 render("bitcoin-ecosystem-card-back", 1800, 2400, b, "back-tee")
 print("done →", OUT)
