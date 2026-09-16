@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1800" height="2400" viewBox="0 0 1800 2400"><defs></defs>
+<text x="450" y="260" font-family="Adwaita Sans" font-weight="900" font-size="112" fill="#ff4f00" text-anchor="middle" >HARD MONEY</text>
+<text x="1350" y="260" font-family="Adwaita Sans" font-weight="900" font-size="112" fill="#ff5c5c" text-anchor="middle" >WEAK MONEY</text>
+<text x="900" y="250" font-family="Adwaita Sans" font-weight="700" font-size="80" fill="#ffffff" text-anchor="middle" >vs</text>
+<circle cx="470" cy="560" r="190" fill="#ff4f00"/><text x="470" y="677.8" font-family="Adwaita Sans" font-weight="900" font-size="323.0" fill="#0b0b0b" text-anchor="middle" transform="rotate(-12 470 560)">₿</text>
+<rect x="1100.0" y="430.0" width="460" height="260" rx="20.8" fill="#2f6b3a"/><rect x="1126.0" y="456.0" width="408.0" height="208.0" rx="13.0" fill="none" stroke="#bfe0c3" stroke-width="7.8"/><circle cx="1330" cy="560" r="78.0" fill="#bfe0c3"/><text x="1330" y="588.6" font-family="Adwaita Sans" font-weight="900" font-size="93.6" fill="#2f6b3a" text-anchor="middle" >$</text>
+<rect x="120" y="855" width="1560" height="170" rx="30" fill="#151515"/><line x1="900" y1="870" x2="900" y2="1010" stroke="#333" stroke-width="6"/><text x="470" y="972" font-family="Adwaita Sans" font-weight="900" font-size="78" fill="#5ef78a" text-anchor="middle" >21M CAP</text>
+<text x="1330" y="972" font-family="Adwaita Sans" font-weight="900" font-size="78" fill="#ff5c5c" text-anchor="middle" >UNLIMITED PRINTING</text>
+<rect x="120" y="1070" width="1560" height="170" rx="30" fill="#151515"/><line x1="900" y1="1085" x2="900" y2="1225" stroke="#333" stroke-width="6"/><text x="470" y="1187" font-family="Adwaita Sans" font-weight="900" font-size="78" fill="#5ef78a" text-anchor="middle" >MATH-BASED</text>
+<text x="1330" y="1187" font-family="Adwaita Sans" font-weight="900" font-size="78" fill="#ff5c5c" text-anchor="middle" >POLICY-BASED</text>
+<rect x="120" y="1285" width="1560" height="170" rx="30" fill="#151515"/><line x1="900" y1="1300" x2="900" y2="1440" stroke="#333" stroke-width="6"/><text x="470" y="1402" font-family="Adwaita Sans" font-weight="900" font-size="78" fill="#5ef78a" text-anchor="middle" >OWNED BY YOU</text>
+<text x="1330" y="1402" font-family="Adwaita Sans" font-weight="900" font-size="78" fill="#ff5c5c" text-anchor="middle" >CONTROLLED</text>
+<rect x="120" y="1500" width="1560" height="170" rx="30" fill="#151515"/><line x1="900" y1="1515" x2="900" y2="1655" stroke="#333" stroke-width="6"/><text x="470" y="1617" font-family="Adwaita Sans" font-weight="900" font-size="78" fill="#5ef78a" text-anchor="middle" >DEFLATIONARY</text>
+<text x="1330" y="1617" font-family="Adwaita Sans" font-weight="900" font-size="78" fill="#ff5c5c" text-anchor="middle" >INFLATIONARY</text>
+<rect x="120" y="1715" width="1560" height="170" rx="30" fill="#151515"/><line x1="900" y1="1730" x2="900" y2="1870" stroke="#333" stroke-width="6"/><text x="470" y="1832" font-family="Adwaita Sans" font-weight="900" font-size="78" fill="#5ef78a" text-anchor="middle" >DECENTRALIZED</text>
+<text x="1330" y="1832" font-family="Adwaita Sans" font-weight="900" font-size="78" fill="#ff5c5c" text-anchor="middle" >CENTRALIZED</text>
+<rect x="120" y="1930" width="1560" height="170" rx="30" fill="#151515"/><line x1="900" y1="1945" x2="900" y2="2085" stroke="#333" stroke-width="6"/><text x="470" y="2047" font-family="Adwaita Sans" font-weight="900" font-size="78" fill="#5ef78a" text-anchor="middle" >FREEDOM MONEY</text>
+<text x="1330" y="2047" font-family="Adwaita Sans" font-weight="900" font-size="78" fill="#ff5c5c" text-anchor="middle" >DEBT MONEY</text>
+
+</svg>
