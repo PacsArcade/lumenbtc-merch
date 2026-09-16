@@ -129,8 +129,8 @@ def bill(cx, cy, w, h):
 
 
 b = ""
-b += txt(450, 260, "HARD MONEY", 112, fill=ORANGE) + txt(1350, 260, "WEAK MONEY", 112, fill=RED)
-b += txt(900, 250, "vs", 80, fill=WHITE, weight=700)
+b += txt(430, 260, "HARD MONEY", 104, fill=ORANGE) + txt(1370, 260, "WEAK MONEY", 104, fill=RED)
+b += txt(900, 252, "vs", 64, fill=WHITE, weight=700)
 b += care_b(470, 560, 330, fill=CREAM, grain=False) + bill(1330, 560, 460, 260)
 rows = [("21M CAP", "UNLIMITED PRINTING"), ("MATH-BASED", "POLICY-BASED"), ("OWNED BY YOU", "CONTROLLED"),
         ("DEFLATIONARY", "INFLATIONARY"), ("DECENTRALIZED", "CENTRALIZED"), ("FREEDOM MONEY", "DEBT MONEY")]
