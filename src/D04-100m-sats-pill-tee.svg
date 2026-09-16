@@ -146,7 +146,7 @@
 <line x1="1800.0" y1="1580" x2="1800.0" y2="2820" stroke="#ffffff" stroke-width="31.0"/>
 <text x="975.0" y="2169.0" font-family="Adwaita Sans" font-weight="900" font-size="420" fill="#0b0b0b" text-anchor="middle" letter-spacing="0" >1 BTC</text>
 <text x="975.0" y="2479.0" font-family="Adwaita Sans" font-weight="600" font-size="130" fill="#0b0b0b" text-anchor="middle" letter-spacing="0" >one bitcoin</text>
-<text x="2625.0" y="2169.0" font-family="Adwaita Sans" font-weight="900" font-size="327.6" fill="#ffffff" text-anchor="middle" letter-spacing="0" >100M SATS</text>
+<text x="2625.0" y="2169.0" font-family="Adwaita Sans" font-weight="900" font-size="235.20000000000002" fill="#ffffff" text-anchor="middle" letter-spacing="0" >100M SATS</text>
 <text x="2625.0" y="2479.0" font-family="Adwaita Sans" font-weight="600" font-size="130" fill="#ffffff" text-anchor="middle" letter-spacing="0" >one hundred million sats</text>
 <text x="1800.0" y="3300" font-family="Press Start 2P" font-weight="400" font-size="118" fill="#ffffff" text-anchor="middle" letter-spacing="0" >1 BTC = 100,000,000 SATS</text>
 <text x="1800.0" y="3560" font-family="Press Start 2P" font-weight="400" font-size="100" fill="#ff4f00" text-anchor="middle" letter-spacing="0" >take your orange pill</text>

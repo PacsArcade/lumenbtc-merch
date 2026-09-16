@@ -3,7 +3,6 @@
 <text x="1800.0" y="2015.2" font-family="Adwaita Sans" font-weight="900" font-size="560" fill="#ffffff" text-anchor="middle" letter-spacing="0" >BUYING</text>
 <text x="1800.0" y="2530.4" font-family="Adwaita Sans" font-weight="900" font-size="560" fill="#ff4f00" text-anchor="middle" letter-spacing="0" >BITCOIN.</text>
 <text x="1800.0" y="3300" font-family="Adwaita Sans" font-weight="900" font-size="560" fill="#ffffff" text-anchor="middle" letter-spacing="0" >YOU'RE</text>
-<text x="1280.0" y="3800" font-family="Adwaita Sans" font-weight="900" font-size="470" fill="#ffffff" text-anchor="middle" letter-spacing="0" >SELLING</text>
-<text x="2440.0" y="3800" font-family="Adwaita Sans" font-weight="900" font-size="470" fill="#5ef78a" text-anchor="middle" letter-spacing="0" >FIAT.</text>
+<text x="1800.0" y="3800" font-family="Adwaita Sans" font-weight="900" font-size="470" text-anchor="middle" fill="#ffffff">SELLING <tspan fill="#5ef78a">FIAT.</tspan></text>
 
 </svg>

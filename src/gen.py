@@ -78,8 +78,7 @@ w, h = TEE
 b = ""
 b += stack(w / 2, 1500, ["YOU'RE NOT", "BUYING", ("BITCOIN.", ORANGE)], 560, gap=0.92, fill=WHITE)
 b += txt(w / 2, 3300, "YOU'RE", 560, fill=WHITE)
-b += txt(w / 2 - 520, 3800, "SELLING", 470, fill=WHITE)
-b += txt(w / 2 + 640, 3800, "FIAT.", 470, fill=GREEN)
+b += f'<text x="{w/2}" y="3800" font-family="{SANS}" font-weight="900" font-size="470" text-anchor="middle" fill="{WHITE}">SELLING <tspan fill="{GREEN}">FIAT.</tspan></text>\n'
 b += sig(w, h)
 designs["D01-selling-fiat-tee"] = (TEE, b, "tee/hoodie front, dark garment")
 
@@ -129,7 +128,7 @@ def pill(cx, cy, L, R, fs_big, fs_small):
     # mirror: the two halves read as the same thing said twice
     out += txt(cx - L / 4, cy - R * 0.05, "1 BTC", fs_big, fill=INK)
     out += txt(cx - L / 4, cy + R * 0.45, "one bitcoin", fs_small, fill=INK, weight=600)
-    out += txt(cx + L / 4, cy - R * 0.05, "100M SATS", fs_big * 0.78, fill=WHITE)
+    out += txt(cx + L / 4, cy - R * 0.05, "100M SATS", fs_big * 0.56, fill=WHITE)
     out += txt(cx + L / 4, cy + R * 0.45, "one hundred million sats", fs_small, fill=WHITE, weight=600)
     return out
 

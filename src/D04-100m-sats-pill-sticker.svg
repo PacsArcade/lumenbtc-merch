@@ -146,7 +146,7 @@
 <line x1="750.0" y1="450.0" x2="750.0" y2="1050.0" stroke="#ffffff" stroke-width="15.0"/>
 <text x="405.0" y="735.0" font-family="Adwaita Sans" font-weight="900" font-size="190" fill="#0b0b0b" text-anchor="middle" letter-spacing="0" >1 BTC</text>
 <text x="405.0" y="885.0" font-family="Adwaita Sans" font-weight="600" font-size="60" fill="#0b0b0b" text-anchor="middle" letter-spacing="0" >one bitcoin</text>
-<text x="1095.0" y="735.0" font-family="Adwaita Sans" font-weight="900" font-size="148.20000000000002" fill="#ffffff" text-anchor="middle" letter-spacing="0" >100M SATS</text>
+<text x="1095.0" y="735.0" font-family="Adwaita Sans" font-weight="900" font-size="106.4" fill="#ffffff" text-anchor="middle" letter-spacing="0" >100M SATS</text>
 <text x="1095.0" y="885.0" font-family="Adwaita Sans" font-weight="600" font-size="60" fill="#ffffff" text-anchor="middle" letter-spacing="0" >one hundred million sats</text>
 
 </svg>
