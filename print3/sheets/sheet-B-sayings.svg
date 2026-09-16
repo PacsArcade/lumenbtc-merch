@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1750" height="2482" viewBox="0 0 1750 2482">
+<rect x="70.0" y="120.0" width="980" height="360" rx="64.8" fill="#0b0b0b"/>
+<text x="560" y="267.75" font-family="Adwaita Sans" font-weight="900" font-size="150" fill="#ffffff" text-anchor="middle" >DON'T TRUST.</text>
+<text x="560" y="440.25" font-family="Adwaita Sans" font-weight="900" font-size="150" fill="#ff4f00" text-anchor="middle" >VERIFY.</text>
+<circle cx="1400" cy="300" r="200" fill="#ff4f00"/>
+<text x="1400" y="424.0" font-family="Adwaita Sans" font-weight="900" font-size="340.0" fill="#0b0b0b" text-anchor="middle" transform="rotate(-12 1400 300)">₿</text>
+<rect x="70.0" y="600.0" width="720" height="320" rx="57.599999999999994" fill="#ff4f00"/>
+<text x="430" y="732.05" font-family="Adwaita Sans" font-weight="900" font-size="130" fill="#0b0b0b" text-anchor="middle" >NOT YOUR</text>
+<text x="430" y="881.55" font-family="Adwaita Sans" font-weight="900" font-size="130" fill="#0b0b0b" text-anchor="middle" >KEYS.</text>
+<rect x="820.0" y="600.0" width="820" height="320" rx="57.599999999999994" fill="#0b0b0b"/>
+<text x="1230" y="741.94" font-family="Press Start 2P" font-weight="400" font-size="84" fill="#ffffff" text-anchor="middle" >TICK TOCK</text>
+<text x="1230" y="838.54" font-family="Press Start 2P" font-weight="400" font-size="84" fill="#ff4f00" text-anchor="middle" >NEXT BLOCK</text>
+<circle cx="330" cy="1200" r="170" fill="#0b0b0b"/>
+<text x="330" y="1305.4" font-family="Adwaita Sans" font-weight="900" font-size="289.0" fill="#ff4f00" text-anchor="middle" transform="rotate(-12 330 1200)">₿</text>
+<rect x="510.0" y="1020.0" width="1140" height="360" rx="64.8" fill="#0b0b0b"/>
+<text x="1080" y="1175.9199999999998" font-family="Adwaita Sans" font-weight="900" font-size="112" fill="#ffffff" text-anchor="middle" >THE SATS WON'T</text>
+<text x="1080" y="1304.72" font-family="Adwaita Sans" font-weight="900" font-size="112" fill="#5ef78a" text-anchor="middle" >STACK THEMSELVES.</text>
+<rect x="70.0" y="1490.0" width="720" height="340" rx="61.199999999999996" fill="#0b0b0b"/>
+<text x="430" y="1632.05" font-family="Adwaita Sans" font-weight="900" font-size="130" fill="#ffffff" text-anchor="middle" >∞</text>
+<text x="430" y="1781.55" font-family="Adwaita Sans" font-weight="900" font-size="130" fill="#ffffff" text-anchor="middle" >21M</text>
+<rect x="250" y="1646" width="360" height="26" fill="#ff4f00"/>
+<rect x="820.0" y="1490.0" width="820" height="340" rx="61.199999999999996" fill="#0b0b0b"/>
+<text x="1230" y="1627.75" font-family="Adwaita Sans" font-weight="900" font-size="150" fill="#ffffff" text-anchor="middle" >hodl</text>
+<text x="1230" y="1800.25" font-family="Adwaita Sans" font-weight="900" font-size="150" fill="#ff4f00" text-anchor="middle" >(verb)</text>
+<rect x="70.0" y="1950.0" width="980" height="360" rx="64.8" fill="#0b0b0b"/>
+<text x="560" y="2104.63" font-family="Adwaita Sans" font-weight="900" font-size="118" fill="#ffffff" text-anchor="middle" >NO RULERS.</text>
+<text x="560" y="2240.33" font-family="Adwaita Sans" font-weight="900" font-size="118" fill="#ff4f00" text-anchor="middle" >NO INFLATION.</text>
+<circle cx="1400" cy="2130" r="200" fill="#0b0b0b"/>
+<circle cx="1400" cy="2130" r="172.0" fill="none" stroke="#ff4f00" stroke-width="18.0"/>
+<text x="1400" y="2230.0" font-family="Adwaita Sans" font-weight="900" font-size="280.0" fill="#ffffff" text-anchor="middle" transform="rotate(-12 1400 2130)">₿</text>
+
+</svg>

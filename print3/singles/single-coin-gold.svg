@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1200" height="1200" viewBox="0 0 1200 1200">
+<circle cx="600" cy="600" r="560" fill="#f7c948"/>
+<circle cx="600" cy="600" r="520.8000000000001" fill="none" stroke="#8a5a00" stroke-width="14.0"/>
+<circle cx="600" cy="600" r="358.40000000000003" fill="none" stroke="#8a5a00" stroke-width="14.0"/>
+<defs><path id="gS" d="M163.2,600 a436.8,436.8 0 1,1 873.6,0 a436.8,436.8 0 1,1 -873.6,0"/></defs>
+<text font-family="Adwaita Sans" font-weight="900" font-size="89.60000000000001" fill="#8a5a00"><textPath xlink:href="#gS" href="#gS" textLength="2744" lengthAdjust="spacing">BITCOIN · DECENTRALIZED · PEER TO PEER · 21,000,000 · </textPath></text>
+<text x="600" y="824.0" font-family="Adwaita Sans" font-weight="900" font-size="616.0" fill="#8a5a00" text-anchor="middle" transform="rotate(-12 600 600)">₿</text>
+
+</svg>

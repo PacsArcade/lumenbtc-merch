@@ -61,12 +61,17 @@ def call(env, method, path, body=None):
         hdr["X-PF-Store-Id"] = env["PRINTFUL_STORE_ID"]
     data = json.dumps(body).encode() if body is not None else None
     req = urllib.request.Request(API + path, data=data, method=method, headers=hdr)
-    try:
-        with urllib.request.urlopen(req, timeout=90) as r:
-            return json.load(r)
-    except urllib.error.HTTPError as e:
-        txt = e.read().decode(errors="replace")
-        raise SystemExit(f"{method} {path} -> HTTP {e.code}: {txt[:700]}")
+    for attempt in range(4):
+        try:
+            with urllib.request.urlopen(req, timeout=90) as r:
+                return json.load(r)
+        except urllib.error.HTTPError as e:
+            txt = e.read().decode(errors="replace")
+            if e.code == 429 and attempt < 3:
+                print("   rate limited — waiting 65 s"); time.sleep(65)
+                req = urllib.request.Request(API + path, data=data, method=method, headers=hdr)
+                continue
+            raise SystemExit(f"{method} {path} -> HTTP {e.code}: {txt[:700]}")
 
 
 def catalog(pid):
@@ -115,7 +120,12 @@ def build_payload(plan, item):
     files = files_for(plan, item)
     placeholder = item.get("retail_price") in (None, "", 0)
     thumb = next((f["url"] for f in files if f["type"] == "back"), files[0]["url"])
-    sync_variants = [{"variant_id": v["id"], "retail_price": price_for(v, item.get("retail_price")), "files": files} for v in variants]
+    vopts = None
+    if spec.get("embroidery"):
+        vopts = [{"id": "embroidery_type", "value": "flat"},
+                 {"id": spec.get("thread_option", "thread_colors"), "value": [THREAD_WHITE, THREAD_ORANGE]}]
+    sync_variants = [{"variant_id": v["id"], "retail_price": price_for(v, item.get("retail_price")), "files": files,
+                      **({"options": vopts} if vopts else {})} for v in variants]
     return {"sync_product": {"name": item["title"], "thumbnail": thumb}, "sync_variants": sync_variants}, placeholder
 
 
@@ -137,9 +147,15 @@ def main(argv):
 
     dry = "--dry-run" in argv
     made = []
+    ledger_path = f"{HERE}/created-{int(time.time())}.json"
+    # never create the same title twice: every earlier run's ledger counts
+    import glob
+    already = {m["title"] for f in glob.glob(f"{HERE}/created-*.json") for m in json.load(open(f)) if m.get("store") == store}
     for item in plan["products"]:
         if only and only not in item["title"].lower():
             continue
+        if item["title"] in already:
+            print(f"· {item['title']} — already created in {store}, skipping"); continue
         payload, placeholder = build_payload(plan, item)
         tag = " [PLACEHOLDER PRICE 2× cost]" if placeholder else ""
         v0 = payload["sync_variants"][0]
@@ -149,9 +165,9 @@ def main(argv):
         res = call(env, "POST", "/store/products", payload)["result"]
         made.append({"id": res["id"], "title": item["title"], "store": store})
         print("   created sync product", res["id"])
-        time.sleep(1.5)
+        json.dump(made, open(ledger_path, "w"), indent=2)   # incremental — never lose a record to a 429
+        time.sleep(7)
     if made:
-        json.dump(made, open(f"{HERE}/created-{int(time.time())}.json", "w"), indent=2)
         print(f"\n{len(made)} products created in the {store} store — verify with --list, then set real prices.")
 
 
