@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" width="1800" height="2400" viewBox="0 0 1800 2400">
+<g id="layer-backdrop" inkscape:label="backdrop" inkscape:groupmode="layer"><rect width="1800" height="2400" fill="none"/></g>
+<g id="layer-bitcoin-word" inkscape:label="BITCOIN word" inkscape:groupmode="layer"><text x="900" y="950" font-family="Adwaita Sans" font-weight="900" font-size="240" fill="#ff4f00" text-anchor="middle" >BITCOIN</text>
+</g>
+<g id="layer-equals-sign" inkscape:label="equals sign" inkscape:groupmode="layer"><text x="900" y="1230" font-family="Adwaita Sans" font-weight="700" font-size="260" fill="#ffffff" text-anchor="middle" >=</text>
+</g>
+<g id="layer-freedom-word" inkscape:label="FREEDOM word" inkscape:groupmode="layer"><text x="900" y="1560" font-family="Adwaita Sans" font-weight="900" font-size="240" fill="#ffffff" text-anchor="middle" >FREEDOM</text>
+</g>
+<g id="layer-key-icon" inkscape:label="key icon" inkscape:groupmode="layer"><circle cx="701.6" cy="1850.0" r="173.6" fill="none" stroke="#ff4f00" stroke-width="55.8"/><rect x="869.0" y="1822.1" width="384.4" height="55.8" fill="#ff4f00"/><rect x="1086.0" y="1822.1" width="49.6" height="124.0" fill="#ff4f00"/><rect x="1172.8" y="1822.1" width="49.6" height="86.8" fill="#ff4f00"/></g>
+<g id="layer-footline" inkscape:label="footline" inkscape:groupmode="layer"><text x="900" y="2260" font-family="Press Start 2P" font-weight="400" font-size="52" fill="#5ef78a" text-anchor="middle" >self-custody is the sentence</text>
+</g>
+</svg>
