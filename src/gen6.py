@@ -16,7 +16,8 @@ Answers the repo/format questions in the same commit:
 
 Outputs → ../print5/{front-tee,back-tee,stickers}/*.{svg,png} (+ *-600dpi.png masters).
 """
-import os, subprocess
+import os, math, subprocess
+import textfit   # 973900: Pango ink boxes to keep the badge words inside the ring
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 PACK = os.path.dirname(HERE)
@@ -62,6 +63,57 @@ def key_icon(cx, cy, s, fill=WHITE):
     out += f'<rect x="{cx + s*0.30:.1f}" y="{cy - s*0.045:.1f}" width="{s*0.08:.1f}" height="{s*0.20:.1f}" fill="{fill}"/>'
     out += f'<rect x="{cx + s*0.44:.1f}" y="{cy - s*0.045:.1f}" width="{s*0.08:.1f}" height="{s*0.14:.1f}" fill="{fill}"/>'
     return out
+
+
+# 973900 (the Admiral on the sticker: "do a different key"): an 8-bit key in the house arcade style — a square-ish
+# pixel bow with a hole, a collar, a three-row shaft and stepped bitting — instead of the thin ring + bar key.
+PIXKEY = [
+    "..XXXXX....................",
+    ".XXXXXXX...................",
+    "XXX...XXX.XX...............",
+    "XX.....XXXXXXXXXXXXXXXXXXXX",
+    "XX.....XXXXXXXXXXXXXXXXXXXX",
+    "XX.....XXXXXXXXXXXXXXXXXXXX",
+    "XXX...XXX.XX......XX.XX.XXX",
+    ".XXXXXXX..........XX.XX.XXX",
+    "..XXXXX...........XX....XXX",
+]
+
+
+def pixel_key(cx, cy, width, fill=ORANGE):
+    """the 8-bit key, `width` px wide, centred on cx,cy."""
+    cols, rows = len(PIXKEY[0]), len(PIXKEY)
+    u = width / cols
+    x0, y0 = cx - width / 2, cy - rows * u / 2
+    return "".join(f'<rect x="{x0 + i*u:.1f}" y="{y0 + j*u:.1f}" width="{u+0.6:.1f}" height="{u+0.6:.1f}" fill="{fill}"/>'
+                   for j, row in enumerate(PIXKEY) for i, ch in enumerate(row) if ch == "X")
+
+
+def badge_stack(cx, cy, ring_inner, margin):
+    """973900 (the Admiral: "the = is too far left, not a fan of the words breaking out of the circle"): the badge reads
+    top to bottom, B / = / FREEDOM, every line centred on its own ink and the whole stack kept `margin` px inside the
+    ring. The type size steps down until every corner of the stack is inside."""
+    R = ring_inner - margin
+    for f in range(110, 30, -2):
+        hb = f * 2.9
+        bw = hb * 558.6 / 747.6
+        fe = f * 1.5   # the = a size up so it reads at chest size
+        e = textfit.ink("=", PIX, 400, fe)
+        F = textfit.ink("FREEDOM", PIX, 400, f)
+        eqh, fh, gap = e[3] - e[1], F[3] - F[1], f * 0.5
+        H = hb + gap + eqh + gap + fh
+        top = cy - H / 2
+        eq_top = top + hb + gap
+        fr_top = eq_top + eqh + gap
+        half = (F[2] - F[0]) / 2
+        corners = [(half, fr_top - cy), (half, fr_top + fh - cy), (bw * 0.42, top - cy)]
+        if all(math.hypot(x, y) <= R for x, y in corners):
+            return [
+                ("badge B", care_b(cx, top + hb / 2, hb, fill=WHITE)),
+                ("badge equals", txt(f"{cx - (e[0] + e[2]) / 2:.1f}", f"{eq_top - e[1]:.1f}", "=", fe, fill=WHITE, font=PIX, weight=400)),
+                ("badge FREEDOM", txt(f"{cx - (F[0] + F[2]) / 2:.1f}", f"{fr_top - F[1]:.1f}", "FREEDOM", f, fill=WHITE, font=PIX, weight=400)),
+            ]
+    raise SystemExit("badge: nothing fits")
 
 
 def render(name, w, h, groups, sub, print_dpi):
@@ -113,20 +165,19 @@ render("freedom-care-b-back", TEE[0], TEE[1], b, "back-tee", TEE[2])
 FRONT = (1800, 2400, 150)
 b = [
     ("badge ring", f'<circle cx="1350" cy="440" r="380" fill="none" stroke="{ORANGE}" stroke-width="20"/>'),
-    ("badge B", care_b(1350, 340, 300, fill=WHITE)),
-    ("badge equals freedom", txt(1350, 620, "= FREEDOM", 76, fill=WHITE, font=PIX, weight=400)),
-]
+] + badge_stack(1350, 440, 370, 60)   # 973900: was B at 340 and one line "= FREEDOM" (76 px) that ran past the ring
 render("freedom-badge-front", FRONT[0], FRONT[1], b, "front-tee", FRONT[2])
 
 # ---------------------------------------------------------------- sticker: the equation, die-cut friendly
 STK = (1200, 1200, 300)
 b = [
     ("plate", f'<rect x="40" y="40" width="1120" height="1120" rx="90" fill="{INK}" stroke="{ORANGE}" stroke-width="26"/>'),
-    ("BITCOIN word s", txt(600, 380, "BITCOIN", 150, fill=ORANGE)),
-    ("equals s", txt(600, 520, "=", 170, fill=WHITE, weight=700)),
-    ("FREEDOM word s", txt(600, 700, "FREEDOM", 150, fill=WHITE)),
-    ("key icon s", key_icon(600, 900, 340, fill=ORANGE)),
-    ("tag", txt(600, 1100, "frens.earth", 44, fill=WHITE, font=PIX, weight=400)),
+    # 973900 (the Admiral: "remove the site brand", "do a different key"): no frens.earth tag, the 8-bit key, and the
+    # stack re-centred on the plate now the tag line is gone.
+    ("BITCOIN word s", txt(600, 355, "BITCOIN", 150, fill=ORANGE)),
+    ("equals s", txt(600, 495, "=", 170, fill=WHITE, weight=700)),
+    ("FREEDOM word s", txt(600, 675, "FREEDOM", 150, fill=WHITE)),
+    ("key icon s", pixel_key(600, 870, 540, fill=ORANGE)),
 ]
 render("freedom-equation-sticker", STK[0], STK[1], b, "stickers", STK[2])
 

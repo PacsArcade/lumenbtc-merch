@@ -12,6 +12,7 @@
 Outputs → ../print4/ (tee front/back at 1800×2400, stickers 1200², previews).
 """
 import os, math, random, subprocess
+from textfit import TILT   # 973900: the logo leans RIGHT like the standard mark (was -12, leaned left)
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 PACK = os.path.dirname(HERE)
@@ -119,7 +120,7 @@ render("sats-pill-glossy-sticker", 1200, 1200, pill(600, 600, 1150, 230, "bitcoi
 
 # ---------------------------------------------------------------- 3. hard vs weak — our infographic
 def coin_half(cx, cy, r):
-    return (f'<circle cx="{cx}" cy="{cy}" r="{r}" fill="{ORANGE}"/>' + txt(cx, cy + r * 0.62, "₿", r * 1.7, fill=INK, extra=f'transform="rotate(-12 {cx} {cy})"'))
+    return (f'<circle cx="{cx}" cy="{cy}" r="{r}" fill="{ORANGE}"/>' + txt(cx, cy + r * 0.62, "₿", r * 1.7, fill=INK, extra=f'transform="rotate({TILT} {cx} {cy})"'))
 
 
 def bill(cx, cy, w, h):

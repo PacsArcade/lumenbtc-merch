@@ -12,6 +12,7 @@ Outputs → ../print2/<placement>/… . The back art is the pack-01 typography r
 1800×2400 from the same SVGs (src/*.svg), so nothing is redrawn by hand twice.
 """
 import os, subprocess, json, glob
+from textfit import TILT   # 970005: the logo leans RIGHT
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 PACK = os.path.dirname(HERE)
@@ -33,15 +34,23 @@ def txt(x, y, s, size, fill=WHITE, font=SANS, weight=900, anchor="middle", extra
 
 def coin(cx, cy, r, fill=ORANGE, glyph=INK):
     return (f'<circle cx="{cx}" cy="{cy}" r="{r}" fill="{fill}"/>\n'
-            + txt(cx, cy + r * 0.62, "₿", r * 1.7, fill=glyph, extra=f'transform="rotate(-12 {cx} {cy})"'))
+            + txt(cx, cy + r * 0.62, "₿", r * 1.7, fill=glyph, extra=f'transform="rotate({TILT} {cx} {cy})"'))   # 970005: was -12 (leaned left)
+
+
+PROOF = os.environ.get("PROOF_DIR")   # 970005: proof mode renders only the names in PROOF_ONLY, into PROOF_DIR; print2/ is left as it was
+ONLY = set(os.environ.get("PROOF_ONLY", "").split(",")) - {""}
+WORK = os.environ.get("WORK_DIR", "/tmp")
 
 
 def render(name, w, h, body, sub):
-    d = f"{OUT}/{sub}"
+    if PROOF and name not in ONLY:
+        return
+    d = f"{WORK}/{sub}" if PROOF else f"{OUT}/{sub}"
     os.makedirs(d, exist_ok=True)
     src = f"{d}/{name}.svg"
     open(src, "w").write(svg(w, h, body))
-    r = subprocess.run(INK_CMD + [src, "--export-type=png", f"--export-filename={d}/{name}.png",
+    png = f"{PROOF}/V2-{sub}-{name}.png" if PROOF else f"{d}/{name}.png"
+    r = subprocess.run(INK_CMD + [src, "--export-type=png", f"--export-filename={png}",
                                   "--export-dpi=96", "--export-background-opacity=0"], capture_output=True, text=True)
     if r.returncode:
         print("ERR", name, r.stderr[-200:])
@@ -75,8 +84,11 @@ render("sleeve-frens-earth-hoodie", 450, 1800, b, "sleeve-hoodie")
 # ---- BACK: the type — pack-01's SVGs re-rendered to 1800×2400 (half of the 3600×4800 masters) --
 for src in sorted(glob.glob(f"{HERE}/D*-tee.svg")):
     name = os.path.basename(src)[:-4]
+    if PROOF and name not in ONLY:
+        continue
     d = f"{OUT}/back-tee"; os.makedirs(d, exist_ok=True)
-    r = subprocess.run(INK_CMD + [src, "--export-type=png", f"--export-filename={d}/{name}-back.png",
+    png = f"{PROOF}/{name}-back.png" if PROOF else f"{d}/{name}-back.png"
+    r = subprocess.run(INK_CMD + [src, "--export-type=png", f"--export-filename={png}",
                                   "--export-dpi=48", "--export-background-opacity=0"], capture_output=True, text=True)
     print("ERR" if r.returncode else "ok", "back-tee", name, "1800x2400")
 
@@ -92,6 +104,8 @@ render("cap-inf-over-21m", 1650, 600, b, "cap")
 b = txt(825, 330, "₿", 400, fill=THREAD_ORANGE)
 render("cap-btc", 1650, 600, b, "cap")
 
+if PROOF:
+    raise SystemExit("proof mode done")
 json.dump({"law": "front logo · back type · sleeve brand", "sizes": "Printful printfiles @150dpi", "out": OUT},
           open(f"{OUT}/README.json", "w"), indent=1)
 print("done →", OUT)

@@ -13,6 +13,8 @@ and word tiles. Gold only on the coin that IS money (house law).
 Outputs → ../print3/sheets/*.png · ../print3/singles/*.png · ../print3/preview/*.png
 """
 import os, math, random, subprocess
+import textfit
+from textfit import TILT   # 970005: every B leans RIGHT (up and to the right), 14 degrees
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 PACK = os.path.dirname(HERE)
@@ -34,7 +36,7 @@ def txt(x, y, s, size, fill=WHITE, font=SANS, weight=900, anchor="middle", extra
 
 # ---------------------------------------------------------------- elements (each centred on cx,cy)
 def coin_flat(cx, cy, r, disc=ORANGE, glyph=INK):
-    return f'<circle cx="{cx}" cy="{cy}" r="{r}" fill="{disc}"/>\n' + txt(cx, cy + r * 0.62, "₿", r * 1.7, fill=glyph, extra=f'transform="rotate(-12 {cx} {cy})"')
+    return f'<circle cx="{cx}" cy="{cy}" r="{r}" fill="{disc}"/>\n' + txt(cx, cy + r * 0.62, "₿", r * 1.7, fill=glyph, extra=f'transform="rotate({TILT} {cx} {cy})"')
 
 
 def coin_inverse(cx, cy, r):
@@ -43,20 +45,35 @@ def coin_inverse(cx, cy, r):
 
 def coin_ring(cx, cy, r):
     return (f'<circle cx="{cx}" cy="{cy}" r="{r}" fill="{INK}"/>\n<circle cx="{cx}" cy="{cy}" r="{r*0.86}" fill="none" stroke="{ORANGE}" stroke-width="{r*0.09}"/>\n'
-            + txt(cx, cy + r * 0.5, "₿", r * 1.4, fill=WHITE, extra=f'transform="rotate(-12 {cx} {cy})"'))
+            + txt(cx, cy + r * 0.5, "₿", r * 1.4, fill=WHITE, extra=f'transform="rotate({TILT} {cx} {cy})"'))
 
 
 def coin_gold(cx, cy, r, uid):
     """the one that IS money — gold, ring words, ₿ struck in the middle."""
-    ring_r = r * 0.78
-    circ = 2 * math.pi * ring_r
-    words = "BITCOIN · DECENTRALIZED · PEER TO PEER · 21,000,000 · "
+    # 973900 (the Admiral: "big gap between the bitcoin and the 21000000 numbers, make the letters bigger so the spaces
+    # are even around the coin"): one gap G everywhere — rim -> top of the words -> inner ring -> the B. The words are
+    # as big as the ring allows (thin spaces round the dots, a tight even spacing), the inner ring sits G under them,
+    # and the B grows to G inside the inner ring. The circumference caps the word size, so the B and ring move instead.
+    words = "BITCOIN · DECENTRALIZED · PEER TO PEER · 21,000,000 · "
+    sw, G = r * 0.025, r * 0.05
+    rim = r * 0.93
+    cap = -textfit.ink("BITCOIN", size=1.0)[1]
+    a = textfit.ring_size(words, 1000.0, ls_frac=0.03) / 1000.0     # size per unit of radius
+    ring_r = (rim - sw / 2 - G) / (1 + cap * a)                     # baseline radius of the words
+    fsz = a * ring_r
+    ls = textfit.ring_spacing(words, ring_r, fsz)
+    desc = textfit.ink(words, size=fsz)[3]                           # the commas hang below the baseline
+    inner = ring_r - desc - G - sw / 2                               # centre line of the inner ring
+    x0, y0, x1, y1 = textfit.ink("₿", size=1.0)
+    reach = 0.885 * math.hypot((x1 - x0) / 2, (y1 - y0) / 2)         # farthest ink from the B's centre, per unit size (measured on the render)
+    bs = (inner - sw / 2 - G) / reach
+    bx, by = cx - (x0 + x1) / 2 * bs, cy - (y0 + y1) / 2 * bs            # text anchor that puts the B's ink centre on the coin centre
     return (f'<circle cx="{cx}" cy="{cy}" r="{r}" fill="{GOLD}"/>\n'
-            f'<circle cx="{cx}" cy="{cy}" r="{r*0.93}" fill="none" stroke="{GOLD_DK}" stroke-width="{r*0.025}"/>\n'
-            f'<circle cx="{cx}" cy="{cy}" r="{r*0.64}" fill="none" stroke="{GOLD_DK}" stroke-width="{r*0.025}"/>\n'
-            f'<defs><path id="g{uid}" d="M{cx-ring_r},{cy} a{ring_r},{ring_r} 0 1,1 {2*ring_r},0 a{ring_r},{ring_r} 0 1,1 -{2*ring_r},0"/></defs>\n'
-            f'<text font-family="{SANS}" font-weight="900" font-size="{r*0.16}" fill="{GOLD_DK}"><textPath xlink:href="#g{uid}" href="#g{uid}" textLength="{circ:.0f}" lengthAdjust="spacing">{words}</textPath></text>\n'
-            + txt(cx, cy + r * 0.4, "₿", r * 1.1, fill=GOLD_DK, extra=f'transform="rotate(-12 {cx} {cy})"'))
+            f'<circle cx="{cx}" cy="{cy}" r="{rim}" fill="none" stroke="{GOLD_DK}" stroke-width="{sw}"/>\n'
+            f'<circle cx="{cx}" cy="{cy}" r="{inner:.1f}" fill="none" stroke="{GOLD_DK}" stroke-width="{sw}"/>\n'
+            f'<defs><path id="g{uid}" d="M{cx-ring_r:.1f},{cy} a{ring_r:.1f},{ring_r:.1f} 0 1,1 {2*ring_r:.1f},0 a{ring_r:.1f},{ring_r:.1f} 0 1,1 -{2*ring_r:.1f},0"/></defs>\n'
+            f'<text font-family="{SANS}" font-weight="900" font-size="{fsz:.1f}" letter-spacing="{ls:.2f}" fill="{GOLD_DK}"><textPath xlink:href="#g{uid}" href="#g{uid}">{words}</textPath></text>\n'
+            + txt(f"{bx:.1f}", f"{by:.1f}", "₿", f"{bs:.1f}", fill=GOLD_DK, extra=f'transform="rotate({TILT} {cx} {cy})"'))
 
 
 def pixels(cx, cy, u, rows, palette):
@@ -100,15 +117,26 @@ ROCKET_PAL = {"O": ORANGE, "W": WHITE, "B": ORANGE, "F": ORANGE, "Y": "#ffd166"}
 def rocket(cx, cy, u):
     body = pixels(cx, cy, u, ROCKET, ROCKET_PAL)
     # the porthole ₿ sits over the B block
-    return body + txt(cx, cy - u * 1.6, "₿", u * 4.2, fill=INK)
+    return body + txt(cx, cy - u * 1.6, "₿", u * 4.2, fill=INK, extra=f'transform="rotate({TILT} {cx} {cy - u * 3.1})"')
+
+
+MOON_N = 16
+MOON_CRATERS = {(3, 4), (4, 4), (3, 5), (4, 5), (11, 3), (12, 3), (11, 4), (11, 10), (12, 10), (11, 11), (12, 11), (5, 12), (6, 12), (5, 13)}
 
 
 def moon(cx, cy, r):
-    return (f'<circle cx="{cx}" cy="{cy}" r="{r}" fill="{WHITE}"/>\n'
-            f'<circle cx="{cx - r*0.25}" cy="{cy - r*0.2}" r="{r*0.18}" fill="#c9c4bb"/>\n'
-            f'<circle cx="{cx + r*0.3}" cy="{cy + r*0.25}" r="{r*0.13}" fill="#c9c4bb"/>\n'
-            f'<circle cx="{cx + r*0.15}" cy="{cy - r*0.45}" r="{r*0.09}" fill="#c9c4bb"/>\n'
-            + txt(cx - r * 0.02, cy + r * 0.35, "₿", r * 0.9, fill=ORANGE))
+    """970005 (the Admiral: "a block moon to match the rocket style"): a 16 x 16 pixel disc of white blocks like the
+    rocket's body, grey crater blocks, the orange B leaning right. Same blocky seams as the rocket."""
+    n = MOON_N
+    u = 2 * r / n
+    out = ""
+    for j in range(n):
+        for i in range(n):
+            if math.hypot(i + 0.5 - n / 2, j + 0.5 - n / 2) <= n / 2 - 0.1:
+                col = "#c9c4bb" if (i, j) in MOON_CRATERS else WHITE
+                out += f'<rect x="{cx - r + i*u:.1f}" y="{cy - r + j*u:.1f}" width="{u+0.6:.1f}" height="{u+0.6:.1f}" fill="{col}"/>\n'
+    out += txt(cx, cy + r * 0.3, "₿", r * 0.85, fill=ORANGE, extra=f'transform="rotate({TILT} {cx} {cy})"')
+    return out
 
 
 def star(cx, cy, r, fill=WHITE):
@@ -134,7 +162,32 @@ def umbrella(cx, cy, s):
     out = f'<path d="{d}" fill="{ORANGE}" stroke="{INK}" stroke-width="{s*0.02}"/>\n'
     out += f'<line x1="{cx}" y1="{top - rr*0.02}" x2="{cx}" y2="{top - rr*0.14}" stroke="{INK}" stroke-width="{s*0.03}" stroke-linecap="round"/>\n'
     out += f'<path d="M{cx},{top} V{cy + s*0.42} a{s*0.09},{s*0.09} 0 0,1 -{s*0.18},0" fill="none" stroke="{INK}" stroke-width="{s*0.035}" stroke-linecap="round"/>\n'
-    out += txt(cx, top - rr * 0.3, "₿", s * 0.34, fill=INK)
+    out += txt(cx, top - rr * 0.3, "₿", s * 0.34, fill=INK, extra=f'transform="rotate({TILT} {cx} {top - rr * 0.3 - s * 0.12})"')
+    return out
+
+
+def pill(cx, cy, L, R, fs_big, fs_small, uid="p"):
+    """970005: the 1 BTC = 100M SATS pill (same art as D04), used where the sats pile was. Every line is fitted inside its
+    half with a buffer; the sat dots are clipped to the capsule."""
+    out = ""
+    x0, y0 = cx - L / 2, cy - R
+    out += f'<clipPath id="cap{uid}"><rect x="{x0}" y="{y0}" width="{L}" height="{2*R}" rx="{R}"/></clipPath>\n'
+    out += f'<rect x="{x0}" y="{y0}" width="{L}" height="{2*R}" rx="{R}" fill="{INK}"/>\n'
+    out += f'<rect x="{x0}" y="{y0}" width="{L/2}" height="{2*R}" fill="{ORANGE}" clip-path="url(#cap{uid})"/>\n'
+    rnd = random.Random(21)
+    for _ in range(int(140 * L / 1380)):
+        px_ = cx + L * 0.04 + rnd.random() * (L / 2 - L * 0.10)
+        py_ = y0 + R * 0.12 + rnd.random() * (R * 1.76)
+        rr = R * (0.045 + rnd.random() * 0.035)
+        out += f'<circle cx="{px_:.0f}" cy="{py_:.0f}" r="{rr:.0f}" fill="{ORANGE}" opacity="0.28" clip-path="url(#cap{uid})"/>\n'
+    out += f'<rect x="{x0}" y="{y0}" width="{L}" height="{2*R}" rx="{R}" fill="none" stroke="{WHITE}" stroke-width="{R*0.06}"/>\n'
+    out += f'<line x1="{cx}" y1="{y0}" x2="{cx}" y2="{y0+2*R}" stroke="{WHITE}" stroke-width="{R*0.05}"/>\n'
+    room = L / 2 * 0.80
+    f = textfit.fit
+    out += txt(cx - L / 4, cy - R * 0.05, "1 BTC", f("1 BTC", room, fs_big), fill=INK)
+    out += txt(cx - L / 4, cy + R * 0.45, "one bitcoin", f("one bitcoin", room, fs_small, weight=600), fill=INK, weight=600)
+    out += txt(cx + L / 4, cy - R * 0.05, "100M SATS", f("100M SATS", room, fs_big * 0.56), fill=WHITE)
+    out += txt(cx + L / 4, cy + R * 0.45, "one hundred million sats", f("one hundred million sats", room, fs_small, weight=600), fill=WHITE, weight=600)
     return out
 
 
@@ -167,6 +220,11 @@ def tile(cx, cy, w, h, lines, size, fill=INK, ink=WHITE, accent=ORANGE, font=SAN
     rx = rx if rx is not None else h * 0.18
     out = f'<rect x="{cx - w/2}" y="{cy - h/2}" width="{w}" height="{h}" rx="{rx}" fill="{fill}"/>\n'
     n = len(lines)
+    # 970005: one size for every line, shrunk until the widest line sits inside the tile with a buffer (the Admiral:
+    # "words go outside the sticker"); the buffer is 11% of the tile width on each side (never under 70 px).
+    fam, wt = ("Adwaita Sans", 900) if font == SANS else ("Press Start 2P", 400)
+    room = w - 2 * max(w * 0.11, 70)   # 973900: 7% -> 11% (the Admiral: "very close to the edges on the next block")
+    size = min([size] + [textfit.fit(l[0] if isinstance(l, tuple) else l, room, size, fam, wt) for l in lines])
     for k, ln in enumerate(lines):
         s_, col = (ln if isinstance(ln, tuple) else (ln, ink))
         y = cy + (k - (n - 1) / 2) * size * 1.15 + size * 0.36
@@ -185,15 +243,18 @@ b += coin_flat(430, 420, 300)                      # the big one, 2 in
 b += coin_gold(1250, 420, 300, "A")                # the money one
 b += coin_inverse(300, 1000, 180)
 b += coin_ring(760, 1000, 180)
-b += pixels(1300, 1000, 22, ['....OOOOOO....', '..OOOOOOOOOO..', '.OOOOOOOOOOOO.', 'OOOOOOOOOOOOOO', 'OOOOOOOOOOOOOO', 'OOOOOOOOOOOOOO', 'OOOOOOOOOOOOOO', 'OOOOOOOOOOOOOO', 'OOOOOOOOOOOOOO', 'OOOOOOOOOOOOOO', 'OOOOOOOOOOOOOO', 'OOOOOOOOOOOOOO', '.OOOOOOOOOOOO.', '..OOOOOOOOOO..', '....OOOOOO....'], {"O": ORANGE}) + txt(1300, 1070, "₿", 200, fill=INK, extra='transform="rotate(-12 1300 1000)"')
+# 970005 (the Admiral: "the corners are clipped on the right and left, please extend them"): the old rows had flat
+# vertical sides with cut corners; this is a true 16 x 16 pixel circle, the B leaning right.
+PIXCOIN = ["".join("O" if math.hypot(i + 0.5 - 8, j + 0.5 - 8) <= 8.0 else "." for i in range(16)) for j in range(16)]
+b += pixels(1300, 1000, 20, PIXCOIN, {"O": ORANGE}) + txt(1300, 1075, "₿", 210, fill=INK, extra=f'transform="rotate({TILT} 1300 1000)"')
 b += rocket(330, 1650, 30)
 b += moon(880, 1600, 210)
 b += star(1160, 1400, 40) + star(1290, 1520, 26) + star(1220, 1720, 34, ORANGE) + star(1380, 1660, 22)
 b += umbrella(1480, 1620, 420)
-b += sats_pile(430, 2200, 210)
-b += clock(880, 2200, 300)
-b += chip(1420, 2200, 200)
-open(f"{OUT}/sheets/sheet-A-coins.svg", "w") if os.path.isdir(f"{OUT}/sheets") else None
+b += pill(436, 2200, 600, 130, 96, 36, "A")    # 970005: the 1 BTC = 100M sats pill replaces the sats pile
+b += clock(1004, 2200, 300)
+b += chip(1443, 2200, 180)
+# 970005: the old line here, open(...sheet-A-coins.svg, "w"), truncated the sheet svg on every import; removed (render() writes it)
 SHEETS = {"sheet-A-coins": b}
 
 # ---------------------------------------------------------------- SHEET B — the sayings pack
@@ -215,7 +276,7 @@ SHEETS["sheet-B-sayings"] = b
 b = ""
 b += rocket(560, 640, 52)
 b += moon(1330, 480, 300)
-b += star(1080, 260, 60) + star(1560, 900, 44) + star(1000, 900, 36, ORANGE) + star(1650, 200, 30)
+b += star(975, 180, 60) + star(1560, 900, 44) + star(1000, 900, 36, ORANGE) + star(1650, 200, 30)
 b += tile(875, 1330, 1500, 360, ["TO THE MOON", ("ONE BLOCK AT A TIME", ORANGE)], 120)
 b += coin_flat(330, 1900, 220) + coin_gold(875, 1900, 220, "C") + coin_inverse(1420, 1900, 220)
 b += tile(875, 2300, 1300, 260, [("stack sats · run a node · hodl", WHITE)], 78)
@@ -229,12 +290,26 @@ SINGLES = {
     "single-rocket": rocket(600, 600, 52),
     "single-moon": moon(600, 600, 540),
     "single-umbrella": umbrella(600, 640, 760),
-    "single-sats-pile": sats_pile(600, 600, 560),
+    "single-pill-1btc-100m-sats": pill(600, 600, 1120, 270, 300, 80, "S"),   # 970005: replaces single-sats-pile
     "single-clock": clock(600, 600, 1000),
 }
 
 
+PROOF = os.environ.get("PROOF_DIR")   # 970005: proof mode renders only the names in PROOF_ONLY into PROOF_DIR; print3/ is left as it was
+ONLY = set(os.environ.get("PROOF_ONLY", "").split(",")) - {""}
+WORK = os.environ.get("WORK_DIR", "/tmp")
+
+
 def render(name, w, h, body, sub):
+    if PROOF:
+        if name not in ONLY:
+            return
+        os.makedirs(WORK, exist_ok=True)
+        src = f"{WORK}/{name}.svg"
+        open(src, "w").write(svg(w, h, body))
+        r = subprocess.run(INK_CMD + [src, "--export-type=png", f"--export-filename={PROOF}/{name}.png", "--export-dpi=96", "--export-background-opacity=0"], capture_output=True, text=True)
+        print("ERR" if r.returncode else "ok", name, f"{w}x{h}", r.stderr[-120:] if r.returncode else "")
+        return
     d = f"{OUT}/{sub}"
     os.makedirs(d, exist_ok=True)
     src = f"{d}/{name}.svg"

@@ -9,6 +9,8 @@ All designs are original type + simple vector; no third-party IP.
 Palette: Lumen 624nm #ff4f00 (never official btc orange), white, near-black.
 """
 import os, subprocess, json
+import textfit  # 970005: Pango measuring (fit text in tiles, close ring gaps)
+from textfit import TILT
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 PACK = os.path.dirname(HERE)
@@ -70,7 +72,7 @@ def btc_mark(cx, cy, r, fill=ORANGE, glyph_fill=INK):
     """A coin: circle + ₿ glyph (Adwaita Sans has U+20BF)."""
     return (f'<circle cx="{cx}" cy="{cy}" r="{r}" fill="{fill}"/>\n'
             + txt(cx, cy + r * 0.62, "₿", r * 1.7, fill=glyph_fill,
-                  font=SANS, weight=900, extra='transform="rotate(-12 %d %d)"' % (cx, cy)))
+                  font=SANS, weight=900, extra='transform="rotate(%d %d %d)"' % (TILT, cx, cy)))  # 970005: leans RIGHT (was -12, mirrored)
 
 
 # ---------------------------------------------------------------- D01
@@ -94,7 +96,7 @@ designs["D02-ignores-them-tee"] = (TEE, b, "tee front, dark garment")
 b = ""
 b += txt(w / 2, 2000, "DON'T TRUST.", 500, fill=WHITE)
 b += txt(w / 2, 2700, "VERIFY.", 820, fill=ORANGE)
-b += txt(w / 2, 3300, "run your own node", 120, fill=WHITE, font=PIX, weight=400)
+b += txt(w / 2, 3300, "run your own node", 150, fill=WHITE, weight=700)  # 970005: one font (was Press Start 2P)
 b += btc_mark(w / 2, 3900, 260)
 b += sig(w, h)
 designs["D03-dont-trust-verify-tee"] = (TEE, b, "tee front, dark garment")
@@ -102,7 +104,7 @@ designs["D03-dont-trust-verify-tee"] = (TEE, b, "tee front, dark garment")
 # D03 sticker
 sw, sh = STK
 b = f'<rect x="40" y="40" width="{sw-80}" height="{sh-80}" rx="120" fill="{INK}" stroke="{ORANGE}" stroke-width="30"/>\n'
-b += txt(sw / 2, 640, "DON'T TRUST.", 190, fill=WHITE)
+b += txt(sw / 2, 640, "DON'T TRUST.", 172, fill=WHITE)   # 970005: 190 -> 172, buffer from the border (unpinned)
 b += txt(sw / 2, 900, "VERIFY.", 250, fill=ORANGE)
 b += btc_mark(sw / 2, 1160, 120)
 designs["D03-dont-trust-verify-sticker"] = (STK, b, "kiss-cut sticker 5x5 (order at 4x4)")
@@ -122,14 +124,17 @@ def pill(cx, cy, L, R, fs_big, fs_small):
         px = cx + L * 0.04 + random.random() * (L / 2 - L * 0.10)
         py = y0 + R * 0.12 + random.random() * (R * 1.76)
         rr = R * (0.045 + random.random() * 0.035)
-        out += f'<circle cx="{px:.0f}" cy="{py:.0f}" r="{rr:.0f}" fill="{ORANGE}" opacity="0.28"/>\n'
+        out += f'<circle cx="{px:.0f}" cy="{py:.0f}" r="{rr:.0f}" fill="{ORANGE}" opacity="0.28" clip-path="url(#cap)"/>\n'
     out += f'<rect x="{x0}" y="{y0}" width="{L}" height="{2*R}" rx="{R}" fill="none" stroke="{WHITE}" stroke-width="{R*0.06}"/>\n'
     out += f'<line x1="{cx}" y1="{y0}" x2="{cx}" y2="{y0+2*R}" stroke="{WHITE}" stroke-width="{R*0.05}"/>\n'
     # mirror: the two halves read as the same thing said twice
-    out += txt(cx - L / 4, cy - R * 0.05, "1 BTC", fs_big, fill=INK)
-    out += txt(cx - L / 4, cy + R * 0.45, "one bitcoin", fs_small, fill=INK, weight=600)
-    out += txt(cx + L / 4, cy - R * 0.05, "100M SATS", fs_big * 0.56, fill=WHITE)
-    out += txt(cx + L / 4, cy + R * 0.45, "one hundred million sats", fs_small, fill=WHITE, weight=600)
+    # 970005: every line is fitted inside its half with a buffer (the Admiral: words collided on the right of the pill)
+    pad = L / 2 * 0.80
+    f = textfit.fit
+    out += txt(cx - L / 4, cy - R * 0.05, "1 BTC", f("1 BTC", pad, fs_big), fill=INK)
+    out += txt(cx - L / 4, cy + R * 0.45, "one bitcoin", f("one bitcoin", pad, fs_small, weight=600), fill=INK, weight=600)
+    out += txt(cx + L / 4, cy - R * 0.05, "100M SATS", f("100M SATS", pad, fs_big * 0.56), fill=WHITE)
+    out += txt(cx + L / 4, cy + R * 0.45, "one hundred million sats", f("one hundred million sats", pad, fs_small, weight=600), fill=WHITE, weight=600)
     return out
 
 b = pill(w / 2, 2200, 3300, 620, 420, 130)
@@ -142,13 +147,14 @@ b = pill(sw / 2, sh / 2, 1380, 300, 190, 60)
 designs["D04-100m-sats-pill-sticker"] = (STK, b, "kiss-cut sticker, capsule shape")
 
 # ---------------------------------------------------------------- D05 tick tock
-def pixel_block(cx, cy, s, fill=ORANGE):
+def pixel_block(cx, cy, s, fill=ORANGE, hm=None):
     """an 8-bit CLOCK (the Admiral: "this doesn't look like a clock") — a 16-px ring, four ticks,
     hands at ten past ten, all on the pixel grid."""
     import math
     out = ""
     n = 16
     u = s / n
+    minute = set()
     cells = set()
     for i in range(n):
         for j in range(n):
@@ -157,11 +163,23 @@ def pixel_block(cx, cy, s, fill=ORANGE):
                 cells.add((i, j))
     ticks = {(7, 1), (8, 1), (7, 14), (8, 14), (1, 7), (1, 8), (14, 7), (14, 8)}
     hands = {(7, 7), (8, 7), (7, 8), (8, 8)}
-    for k in range(1, 5):   # hour hand → 10 o'clock
-        hands.add((7 - int(k * 0.7), 7 - k))
-    for k in range(1, 7):   # minute hand → 2 o'clock
-        hands.add((8 + int(k * 0.85), 7 - int(k * 0.5)))
-    for grp, col in ((cells, fill), (ticks, WHITE), (hands, WHITE)):
+    if hm is None:
+        for k in range(1, 5):   # hour hand → 10 o'clock
+            hands.add((7 - int(k * 0.7), 7 - k))
+        for k in range(1, 7):   # minute hand → 2 o'clock
+            hands.add((8 + int(k * 0.85), 7 - int(k * 0.5)))
+    else:
+        # 970005 (the Admiral: "change the clock to be around 419"): hands read hm = (hour, minute)
+        hh_, mm_ = hm
+        minute = set()
+        for ang, ln, dest in ((((hh_ % 12) + mm_ / 60) * 30, 3.4, hands), (mm_ * 6, 5.4, minute)):
+            a = math.radians(ang)
+            t = 0.0
+            while t <= ln:
+                dest.add((int(math.floor(8 + t * math.sin(a))), int(math.floor(8 - t * math.cos(a)))))
+                t += 0.25
+        minute -= hands   # the minute hand is drawn in orange so the two hands read apart at 4:19
+    for grp, col in ((cells, fill), (ticks, WHITE), (minute if hm else set(), fill), (hands, WHITE)):
         for (i, j) in grp:
             out += f'<rect x="{cx - s/2 + i*u:.0f}" y="{cy - s/2 + j*u:.0f}" width="{u+0.5:.1f}" height="{u+0.5:.1f}" fill="{col}"/>\n'
     return out
@@ -169,7 +187,7 @@ def pixel_block(cx, cy, s, fill=ORANGE):
 b = ""
 b += txt(w / 2, 1500, "TICK TOCK", 300, fill=WHITE, font=PIX, weight=400)
 b += txt(w / 2, 1950, "NEXT BLOCK", 300, fill=ORANGE, font=PIX, weight=400)
-b += pixel_block(w / 2, 3200, 1400)
+b += pixel_block(w / 2, 3033, 1400, hm=(4, 19))  # 970005: centred between the words, measured on ink (gap above = gap below = 422 px), hands at 4:19
 b += txt(w / 2, 4250, "it all comes back to the block", 96, fill=WHITE, font=PIX, weight=400)
 b += sig(w, h)
 designs["D05-tick-tock-next-block-tee"] = (TEE, b, "tee front, dark garment; pixel face = house arcade tie")
@@ -255,9 +273,9 @@ def fraction(cx, cy, s, top=WHITE, bar=ORANGE, bot=WHITE):
 
 hw, hh = HAT
 THREAD_ORANGE = "#E25C27"  # Printful flat-embroidery thread 1987 Orange, nearest to 624nm
-HAT = (760, 700)  # cropped to the content (the Admiral: "crop this to fit")
+HAT = (760, 765)  # 970005: was 760x700 and cut the top of the infinity sign; now ink box + 40 px buffer; cropped to the content (the Admiral: "crop this to fit")
 hw, hh = HAT
-b = fraction(hw / 2, hh / 2 + 20, 600, bar=THREAD_ORANGE)
+b = fraction(hw / 2, 425, 600, bar=THREAD_ORANGE)  # 970005: cy measured from the ink box (was hh/2+20, which cut the top)
 designs["D09-inf-over-21m-hat"] = (HAT, b, "cap/beanie embroidery front — 3 thread colours max (white, 624 orange)")
 
 b = f'<circle cx="{sw/2}" cy="{sh/2}" r="{sw/2-40}" fill="{INK}" stroke="{ORANGE}" stroke-width="30"/>\n'
@@ -275,36 +293,38 @@ b += txt(w / 2, 1280, "IN THE BANK.”", 330, fill=WHITE)
 b += txt(w / 2, 2200, "IT'S NOT", 640, fill=ORANGE)
 b += txt(w / 2, 2860, "YOURS.", 640, fill=ORANGE)
 b += stack(w / 2, 3500, ["you have to ask", "permission to use it."], 170, gap=1.25, fill=WHITE, weight=700)
-b += txt(w / 2, 4200, "not your keys, not your coins", 96, fill=ORANGE, font=PIX, weight=400)
+b += txt(w / 2, 4200, "not your keys, not your coins", 130, fill=ORANGE, weight=700)  # 970005: one font (was Press Start 2P)
 b += sig(w, h)
 designs["D10-not-yours-tee"] = (TEE, b, "tee front, dark garment")
 
 b = f'<rect x="40" y="40" width="{sw-80}" height="{sh-80}" rx="80" fill="{ORANGE}"/>\n'
 b += txt(sw / 2, 560, "NOT YOUR", 210, fill=INK)
 b += txt(sw / 2, 800, "KEYS,", 210, fill=INK)
-b += txt(sw / 2, 1060, "NOT YOUR COINS.", 150, fill=WHITE)
+b += txt(sw / 2, 1060, "NOT YOUR COINS.", 136, fill=WHITE)   # 970005: 150 -> 136, buffer from the edge (unpinned)
 b += btc_mark(sw / 2, 1270, 110, fill=INK, glyph_fill=ORANGE)
 designs["D10-not-your-keys-sticker"] = (STK, b, "kiss-cut sticker, orange field")
 
 # ---------------------------------------------------------------- D11 no rulers ring
 def ring_text(cx, cy, r, s, size, fill):
-    """the words fill the whole circle (textLength = circumference) so the gaps are even."""
-    import math
-    circ = 2 * math.pi * r
+    """970005: the words close the whole circle with an even gap (the Admiral: "huge gap between the markings").
+    Inkscape ignores textLength on a textPath, so the letter-spacing is solved here from Pango's measure of the
+    string: spacing = (circumference - natural width) / characters. The string ends in a separator so the
+    last word is parted from the first the same as every other pair."""
+    ls = textfit.ring_spacing(s, r, size)
     return (f'<defs><path id="ring" d="M{cx-r},{cy} a{r},{r} 0 1,1 {2*r},0 a{r},{r} 0 1,1 -{2*r},0"/></defs>\n'
-            f'<text font-family="{SANS}" font-weight="900" font-size="{size}" fill="{fill}">'
-            f'<textPath href="#ring" startOffset="0" textLength="{circ:.0f}" lengthAdjust="spacing">{s}</textPath></text>\n')
+            f'<text font-family="{SANS}" font-weight="900" font-size="{size:.1f}" letter-spacing="{ls:.2f}" fill="{fill}">'
+            f'<textPath href="#ring" startOffset="0">{s}</textPath></text>\n')
 
 b = btc_mark_inverse(w / 2, 2400, 900)
 b += f'<circle cx="{w/2}" cy="2400" r="1150" fill="none" stroke="{WHITE}" stroke-width="24"/>\n'
-b += ring_text(w / 2, 2400, 1320, "NO RULERS · 21 MILLION CAP · NO INFLATION · NO PERMISSION ·", 230, WHITE)
+b += ring_text(w / 2, 2400, 1320, "NO RULERS \u00b7 21 MILLION CAP \u00b7 NO INFLATION \u00b7 NO PERMISSION \u00b7 ", textfit.ring_size("NO RULERS \u00b7 21 MILLION CAP \u00b7 NO INFLATION \u00b7 NO PERMISSION \u00b7 ", 1320, max_size=250), WHITE)
 b += sig(w, h)
 designs["D11-no-rulers-ring-tee"] = (TEE, b, "tee front, dark garment")
 
 b = f'<circle cx="{sw/2}" cy="{sh/2}" r="{sw/2-40}" fill="{INK}" stroke="{ORANGE}" stroke-width="24"/>\n'
 b += btc_mark_inverse(sw / 2, sh / 2, 360)
 b += f'<circle cx="{sw/2}" cy="{sh/2}" r="460" fill="none" stroke="{WHITE}" stroke-width="12"/>\n'
-b += ring_text(sw / 2, sh / 2, 540, "NO RULERS \u00b7 21 MILLION CAP \u00b7 NO INFLATION \u00b7 NO PERMISSION \u00b7 ", 78, WHITE)
+b += ring_text(sw / 2, sh / 2, 540, "NO RULERS \u00b7 21 MILLION CAP \u00b7 NO INFLATION \u00b7 NO PERMISSION \u00b7 ", textfit.ring_size("NO RULERS \u00b7 21 MILLION CAP \u00b7 NO INFLATION \u00b7 NO PERMISSION \u00b7 ", 540, max_size=96), WHITE)
 designs["D11-no-rulers-ring-sticker"] = (STK, b, "kiss-cut sticker, round, dark field")
 
 
@@ -322,7 +342,18 @@ for name, (size, body, note) in designs.items():
 json.dump(manifest, open(f"{PACK}/manifest.json", "w"), indent=2)
 print("wrote", len(manifest), "svgs")
 
-if os.environ.get("RENDER", "1") == "1":
+PROOF = os.environ.get("PROOF_DIR")   # 970005: proof mode renders ONLY into this folder; print/ and preview/ are left as they were
+if PROOF:
+    ONLY = set(os.environ.get("PROOF_ONLY", "").split(",")) - {""}
+    INK_CMD = ["flatpak", "run", "org.inkscape.Inkscape"]
+    for m in manifest:
+        if ONLY and m["name"] not in ONLY:
+            continue
+        s_ = f"{PACK}/{m['svg']}"
+        r = run(INK_CMD + [s_, "--export-type=png", f"--export-filename={PROOF}/{m['name']}.png",
+                           "--export-dpi=96", "--export-background-opacity=0"])
+        print("ERR" if r.returncode else "ok", m["name"], r.stderr[-300:] if r.returncode else "")
+elif os.environ.get("RENDER", "1") == "1":
     INK_CMD = ["flatpak", "run", "org.inkscape.Inkscape"]
     for m in manifest:
         s = f"{PACK}/{m['svg']}"
